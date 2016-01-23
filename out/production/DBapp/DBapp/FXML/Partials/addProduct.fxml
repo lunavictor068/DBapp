@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+
+<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DBapp.Controllers.addProductController">
+   <content>
+      <BorderPane>
+         <center>
+            <GridPane maxHeight="-Infinity" maxWidth="-Infinity">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description" GridPane.rowIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Price" GridPane.rowIndex="2" />
+                  <TextField fx:id="name" GridPane.columnIndex="1" />
+                  <TextField fx:id="description" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="price" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#addProduct" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+         </center>
+         <top>
+            <HBox style="-fx-background-color: #757575;" BorderPane.alignment="CENTER">
+               <children>
+                  <TextFlow>
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Product">
+                           <font>
+                              <Font name="Arial Bold" size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </TextFlow>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" />
+               </BorderPane.margin>
+            </HBox>
+         </top>
+         <bottom>
+            <TextFlow BorderPane.alignment="CENTER">
+               <children>
+                  <Text fx:id="message" strokeType="OUTSIDE" strokeWidth="0.0" />
+               </children>
+            </TextFlow>
+         </bottom>
+      </BorderPane>
+   </content>
+</ScrollPane>

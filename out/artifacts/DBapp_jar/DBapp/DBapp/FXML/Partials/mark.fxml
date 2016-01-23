@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="DBapp.Controllers.markTransactionController">
+   <content>
+      <GridPane>
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quote Status" GridPane.columnIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Transaction ID" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Invoice Status" GridPane.columnIndex="2" />
+            <TextField GridPane.rowIndex="1" fx:id="transactionIDField" />
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="quoteField"/>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" fx:id="invoiceField"/>
+            <Button mnemonicParsing="false" text="Submit" GridPane.columnIndex="3" GridPane.rowIndex="1"
+                    onMouseClicked="#markTransactionClick"/>
+         </children>
+      </GridPane>
+   </content>
+</ScrollPane>

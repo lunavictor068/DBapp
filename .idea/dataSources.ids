@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - alex5db@localhost" uuid="e080eac7-79e7-4d6b-9d36-017b39b3492a">
+    <database-info product="MySQL" version="5.5.42" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <schema name="" catalog="alex5db"/>
+    <table name="customer" schema="" catalog="alex5db" type="TABLE">
+      <column name="CustomerID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="First" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="Last" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="BusinessName" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="Address" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="City" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="State" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="Zip" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="Phone" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="Email" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="Fax" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="CustomerID"/>
+      <exported-key name="transaction_ibfk_1" table="transaction" schema="" catalog="alex5db" columns="CustomerID"/>
+    </table>
+    <table name="employee" schema="" catalog="alex5db" type="TABLE">
+      <column name="EmployeeID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="First" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="Last" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="Address" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="City" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="State" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="Zip" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="Phone" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="Email" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="EmployeeID"/>
+      <exported-key name="transaction_ibfk_2" table="transaction" schema="" catalog="alex5db" columns="EmployeeID"/>
+    </table>
+    <table name="orderitem" schema="" catalog="alex5db" type="TABLE">
+      <column name="TransactionID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ProductID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Quantity" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <foreign-key name="orderitem_ibfk_1" columns="TransactionID" ref-table="transaction" ref-schema="" ref-catalog="alex5db" ref-columns="TransactionID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="orderitem_ibfk_2" columns="ProductID" ref-table="product" ref-schema="" ref-catalog="alex5db" ref-columns="ProductID" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="product" schema="" catalog="alex5db" type="TABLE">
+      <column name="ProductID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Name" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="Description" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="Price" sqlType="DECIMAL" precision="10" scale="2" nullable="false" jdbcType="3"/>
+      <primary-key name="PRIMARY" columns="ProductID"/>
+      <exported-key name="orderitem_ibfk_2" table="orderitem" schema="" catalog="alex5db" columns="ProductID"/>
+    </table>
+    <table name="transaction" schema="" catalog="alex5db" type="TABLE">
+      <column name="TransactionID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Quote" sqlType="ENUM" precision="9" scale="0" nullable="false" jdbcType="1"/>
+      <column name="Invoice" sqlType="ENUM" precision="7" scale="0" nullable="false" jdbcType="1"/>
+      <column name="CustomerID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="EmployeeID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="TransactionID"/>
+      <foreign-key name="transaction_ibfk_1" columns="CustomerID" ref-table="customer" ref-schema="" ref-catalog="alex5db" ref-columns="CustomerID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="transaction_ibfk_2" columns="EmployeeID" ref-table="employee" ref-schema="" ref-catalog="alex5db" ref-columns="EmployeeID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="orderitem_ibfk_1" table="orderitem" schema="" catalog="alex5db" columns="TransactionID"/>
+    </table>
+  </data-source>
+</component>
