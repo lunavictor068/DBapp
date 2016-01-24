@@ -1,5 +1,6 @@
 package DBapp.Controllers;
 
+import DBapp.ModelData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -17,7 +18,7 @@ public class newCustomerController implements Initializable {
     }
 
     public void addCustomer(){
-        Main.dbConnection.addCustomer(
+        ModelData.dbConnection.addCustomer(
                 first.getText(),last.getText(),businessName.getText(), address.getText(),
                 city.getText(), state.getText(), zip.getText(), phone.getText(),
                 email.getText(),fax.getText()

@@ -1,6 +1,7 @@
 package DBapp.Controllers;
 
 import DBapp.Main;
+import DBapp.ModelData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -17,7 +18,7 @@ public class addEmployeeController implements Initializable{
     Text message;
 
     public void addEmployee(){
-        Main.dbConnection.addEmployee(
+        ModelData.dbConnection.addEmployee(
                 first.getText(),last.getText(), address.getText(),
                 city.getText(), state.getText(), zip.getText(), phone.getText(),
                 email.getText());

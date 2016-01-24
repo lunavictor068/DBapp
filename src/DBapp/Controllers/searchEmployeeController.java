@@ -3,6 +3,7 @@ package DBapp.Controllers;
 import DBapp.Customer;
 import DBapp.Employee;
 import DBapp.Main;
+import DBapp.ModelData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -27,7 +28,7 @@ public class searchEmployeeController implements Initializable{
     public void searchCustomerClick(){
         System.out.println("Setting items");
         table.setItems(
-                Main.dbConnection.searchEmployee(
+                ModelData.dbConnection.searchEmployee(
                         employeeIDField.getText(),
                         firstField.getText(),
                         lastField.getText(),

@@ -45,7 +45,7 @@ public class addTransactionController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                nameSearchField.getItems().addAll(Main.dbConnection.getAllProducts());
+                nameSearchField.getItems().addAll(ModelData.dbConnection.getAllProducts());
             }
         }).start();
         quantityTableColumn.setCellFactory(
@@ -105,7 +105,7 @@ public class addTransactionController implements Initializable {
         }
         System.out.println("-----END TABLE CONTENTS-----");
             try {
-                Main.dbConnection.newTransaction(
+                ModelData.dbConnection.newTransaction(
                         quoteBox.getSelectionModel().getSelectedItem(),
                         invoiceBox.getSelectionModel().getSelectedItem(),
                         getCustomerID(),

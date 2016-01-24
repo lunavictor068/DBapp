@@ -1,6 +1,7 @@
 package DBapp.Controllers;
 
 import DBapp.Main;
+import DBapp.ModelData;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,7 +28,7 @@ public class searchTransactionController {
         employeeIDTColumn.setCellValueFactory(new PropertyValueFactory<>("employeeID"));
         System.out.println(transactionIDColumn.getText() + " ------------");
         tableView.setItems(
-                Main.dbConnection.searchTransactions(
+                ModelData.dbConnection.searchTransactions(
                         transactionIDField.getText(),
                         quoteField.getText(),
                         invoiceField.getText(),

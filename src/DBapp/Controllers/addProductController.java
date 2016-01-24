@@ -1,6 +1,7 @@
 package DBapp.Controllers;
 
 import DBapp.Main;
+import DBapp.ModelData;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
@@ -11,7 +12,7 @@ public class addProductController {
 
         try {
             double doublePrice = Double.parseDouble(price.getText());
-            Main.dbConnection.addProduct(
+            ModelData.dbConnection.addProduct(
                     name.getText(),
                     description.getText(),
                     doublePrice

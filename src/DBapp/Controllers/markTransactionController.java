@@ -1,6 +1,7 @@
 package DBapp.Controllers;
 
 import DBapp.Main;
+import DBapp.ModelData;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
@@ -15,7 +16,7 @@ public class markTransactionController {
         System.out.println("quote - " + quoteField);
         System.out.println("invoice - " + invoiceField);
 
-        Main.dbConnection.markTransaction(
+        ModelData.dbConnection.markTransaction(
                 transactionIDField.getText(),
                 quoteField.getText(),
                 invoiceField.getText()

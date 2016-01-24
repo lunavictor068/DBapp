@@ -2,6 +2,7 @@ package DBapp.Controllers;
 
 import DBapp.Employee;
 import DBapp.Main;
+import DBapp.ModelData;
 import DBapp.Product;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -26,7 +27,7 @@ public class searchProductController {
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         table.setItems(
-                Main.dbConnection.searchProduct(
+                ModelData.dbConnection.searchProduct(
                         productIDField.getText(),
                         nameField.getText(),
                         descriptionField.getText(),
