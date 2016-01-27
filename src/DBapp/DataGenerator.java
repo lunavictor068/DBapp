@@ -11,7 +11,7 @@ import java.io.IOException;
  * Created by lunav on 1/20/2016.
  */
 public class DataGenerator {
-    private static DBConnection dbConnection = new DBConnection("dbuser", "password");
+    private static DBConnection dbConnection = new DBConnection();
     public static void main(String[] args) throws Exception {
         for (String keyword : args) {
             try {

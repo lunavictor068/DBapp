@@ -1,7 +1,7 @@
 package DBapp.Controllers;
 
+import DBapp.AppUtils;
 import DBapp.Customer;
-import DBapp.Main;
 import DBapp.ModelData;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -29,7 +29,8 @@ public class searchCustomerController {
         faxColumn.setCellValueFactory(new PropertyValueFactory<>("fax"));
         table.setItems(
                 ModelData.dbConnection.searchCustomer(
-                        customerIDField.getText(),
+                        AppUtils.integerNullify(customerIDField.getText()),
+                        // TODO - nullify the rest of the inputs.
                         firstField.getText(),
                         lastField.getText(),
                         businessNameField.getText(),

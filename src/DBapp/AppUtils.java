@@ -1,7 +1,6 @@
 package DBapp;
 
-import javafx.collections.ObservableList;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
 import javax.print.*;
@@ -11,26 +10,51 @@ import java.io.FileNotFoundException;
 
 
 public class AppUtils {
-    public static void popularizeBox(ComboBox comboBox){
-        TransactionProduct[] transactionProducts = {
-          new TransactionProduct("ads","gfg","","",1),
-          new TransactionProduct("sd","sgd","","",1),
-          new TransactionProduct("23","sgfd","","",1),
-          new TransactionProduct("bf","sdgdf","","",1),
-          new TransactionProduct("sdfs","dsfgdg","","",1),
-          new TransactionProduct("rt","sdgdfg","","",1),
-          new TransactionProduct("aet","fdgdfg","","",1),
-          new TransactionProduct("pppp","sdgdfg","","",1),
-                new TransactionProduct(Integer.toString(1), "Name", "Des", "30", 10)
-        };
-        comboBox.getItems().addAll(transactionProducts);
-
-    }
 
     public static void clearTextFields(TextField... textFields){
         for (TextField textField:textFields)
             textField.clear();
     }
+
+    public static Integer integerNullify(String input){
+        if (input.equals("")) return null;
+        else {
+            try {
+                return Integer.parseInt(input);
+            }
+            catch (NumberFormatException e){
+                displayAlert("Not an integer!", "Please enter an integer.", e.getMessage());
+            }
+        }
+        return null;
+    }
+
+    public static String stringNullify(String input){
+        if (input.equals("")) return null;
+        else return input;
+    }
+
+    public static Double doubleNullify(String input){
+        if (input.equals("")) return null;
+        else
+            try{
+                return Double.parseDouble(input);
+            }
+            catch (NumberFormatException e){
+                displayAlert("Not a number!!", "Please enter a number.", e.getMessage());
+            }
+        return null;
+    }
+
+    public static void displayAlert(String title, String header, String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(message);
+        alert.show();
+
+    }
+
 
     private static void print(){
         // TODO - FINISH

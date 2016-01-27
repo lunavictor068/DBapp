@@ -20,7 +20,6 @@
       <column name="Email" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <column name="Fax" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <primary-key name="PRIMARY" columns="CustomerID"/>
-      <exported-key name="transaction_ibfk_1" table="transaction" schema="" catalog="alex5db" columns="CustomerID"/>
     </table>
     <table name="employee" schema="" catalog="alex5db" type="TABLE">
       <column name="EmployeeID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -33,7 +32,6 @@
       <column name="Phone" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
       <column name="Email" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <primary-key name="PRIMARY" columns="EmployeeID"/>
-      <exported-key name="transaction_ibfk_2" table="transaction" schema="" catalog="alex5db" columns="EmployeeID"/>
     </table>
     <table name="orderitem" schema="" catalog="alex5db" type="TABLE">
       <column name="TransactionID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
@@ -48,7 +46,6 @@
       <column name="Description" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <column name="Price" sqlType="DECIMAL" precision="10" scale="2" nullable="false" jdbcType="3"/>
       <primary-key name="PRIMARY" columns="ProductID"/>
-      <exported-key name="orderitem_ibfk_2" table="orderitem" schema="" catalog="alex5db" columns="ProductID"/>
     </table>
     <table name="transaction" schema="" catalog="alex5db" type="TABLE">
       <column name="TransactionID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -59,7 +56,200 @@
       <primary-key name="PRIMARY" columns="TransactionID"/>
       <foreign-key name="transaction_ibfk_1" columns="CustomerID" ref-table="customer" ref-schema="" ref-catalog="alex5db" ref-columns="CustomerID" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="transaction_ibfk_2" columns="EmployeeID" ref-table="employee" ref-schema="" ref-catalog="alex5db" ref-columns="EmployeeID" update-rule="3" delete-rule="3" deferrability="2"/>
-      <exported-key name="orderitem_ibfk_1" table="orderitem" schema="" catalog="alex5db" columns="TransactionID"/>
     </table>
+  </data-source>
+  <data-source name="MySQL - acsm_dafb58a7a81b817@us-cdbr-azure-central-a.cloudapp.net" uuid="c13f93d5-b41a-4fee-bdfb-793e5d28e0a8">
+    <database-info product="MySQL" version="5.5.45-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.4">
+      <schema id="1" name="acsm_dafb58a7a81b817"/>
+      <table id="2" parent="1" name="customer"/>
+      <table id="3" parent="1" name="employee"/>
+      <table id="4" parent="1" name="orderitem"/>
+      <table id="5" parent="1" name="product"/>
+      <table id="6" parent="1" name="transaction"/>
+      <column id="7" parent="2" name="CustomerID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="8" parent="2" name="First">
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="9" parent="2" name="Last">
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="10" parent="2" name="BusinessName">
+        <data-type>text</data-type>
+      </column>
+      <column id="11" parent="2" name="Address">
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="12" parent="2" name="City">
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="13" parent="2" name="State">
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="14" parent="2" name="Zip">
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="15" parent="2" name="Phone">
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="16" parent="2" name="Email">
+        <data-type>text</data-type>
+      </column>
+      <column id="17" parent="2" name="Fax">
+        <data-type>text</data-type>
+      </column>
+      <key id="18" parent="2" name="PRIMARY">
+        <columns>CustomerID</columns>
+        <primary>1</primary>
+      </key>
+      <column id="19" parent="3" name="EmployeeID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="20" parent="3" name="First">
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="21" parent="3" name="Last">
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="22" parent="3" name="Address">
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="23" parent="3" name="City">
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="24" parent="3" name="State">
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="25" parent="3" name="Zip">
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="26" parent="3" name="Phone">
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="27" parent="3" name="Email">
+        <data-type>text</data-type>
+      </column>
+      <key id="28" parent="3" name="PRIMARY">
+        <columns>EmployeeID</columns>
+        <primary>1</primary>
+      </key>
+      <column id="29" parent="4" name="TransactionID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="30" parent="4" name="ProductID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="31" parent="4" name="Quantity">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <index id="32" parent="4" name="ProductID">
+        <columns>ProductID</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="33" parent="4" name="TransactionID">
+        <columns>TransactionID</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <foreign-key id="34" parent="4" name="orderitem_ibfk_1">
+        <columns>TransactionID</columns>
+        <ref-key>~.transaction.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="35" parent="4" name="orderitem_ibfk_2">
+        <columns>ProductID</columns>
+        <ref-key>~.product.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="36" parent="5" name="ProductID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="37" parent="5" name="Name">
+        <mandatory>1</mandatory>
+        <data-type>text</data-type>
+      </column>
+      <column id="38" parent="5" name="Description">
+        <data-type>text</data-type>
+      </column>
+      <column id="39" parent="5" name="Price">
+        <mandatory>1</mandatory>
+        <data-type>decimal(10,2)</data-type>
+      </column>
+      <key id="40" parent="5" name="PRIMARY">
+        <columns>ProductID</columns>
+        <primary>1</primary>
+      </key>
+      <column id="41" parent="6" name="TransactionID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="42" parent="6" name="Quote">
+        <mandatory>1</mandatory>
+        <data-type>enum(&apos;ACCEPTED&apos;, &apos;DECLINED&apos;, &apos;EXPIRED&apos;, &apos;PENDING&apos;)</data-type>
+      </column>
+      <column id="43" parent="6" name="Invoice">
+        <mandatory>1</mandatory>
+        <data-type>enum(&apos;PAID&apos;, &apos;UNPAID&apos;, &apos;PENDING&apos;)</data-type>
+      </column>
+      <column id="44" parent="6" name="CustomerID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="45" parent="6" name="EmployeeID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <index id="46" parent="6" name="CustomerID">
+        <columns>CustomerID</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="47" parent="6" name="EmployeeID">
+        <columns>EmployeeID</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="48" parent="6" name="PRIMARY">
+        <columns>TransactionID</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="49" parent="6" name="transaction_ibfk_1">
+        <columns>CustomerID</columns>
+        <ref-key>~.customer.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="50" parent="6" name="transaction_ibfk_2">
+        <columns>EmployeeID</columns>
+        <ref-key>~.employee.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+    </database-model>
   </data-source>
 </component>

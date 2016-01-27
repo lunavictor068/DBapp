@@ -1,124 +1,225 @@
 package DBapp;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Optional;
 
 
 public class DBConnection {
     private ResultSet resultSet;
-    // private String USERNAME;
-   //  private String PASSWORD;
     private Connection connection;
-    private String connectionAddress;
 
-    private final String addCustoerUpdate = "";
-
-    public DBConnection(String username, String password){
-        connectionAddress = "jdbc:mysql://localhost/alex5db";
+    public DBConnection(){
+        String completeAddress;
+        String driver = "jdbc:mysql://";
+        String databaseAddress = "localhost";
+        String databaseName = "alexdb";
+        String username = "dbuser";
+        String password = "password";
         try {
-            connection = DriverManager.getConnection(connectionAddress, username, password);
+            completeAddress = driver + databaseAddress +"/"+ databaseName;
+            connection = DriverManager.getConnection(completeAddress, username, password);
         } catch (SQLException e) {
-            e.printStackTrace();
+            Dialog<DatabaseInfo> dialog = dbErrorDialog();
+            dialog.setTitle("Database Error");
+            boolean isConnectionValid = false;
+            while (!isConnectionValid) {
+                String message = "Error code: " + e.getErrorCode() + "\n" + e.getMessage();
+                dialog.setHeaderText(message);
+                Optional<DatabaseInfo> result = dialog.showAndWait();
+                if (result.isPresent()) {
+                    databaseAddress = result.get().databaseAddress;
+                    databaseName = result.get().databaseName;
+                    username = result.get().username;
+                    password = result.get().password;
+                } else {
+                    // If they press cancel or exit.
+                    Platform.exit();
+                    System.exit(0);
+                }
+                completeAddress = driver + databaseAddress +"/"+ databaseName;
+                try {
+                    System.out.println(completeAddress);
+                    System.out.println(username);
+                    System.out.println(password);
+                    connection = DriverManager.getConnection(completeAddress, username, password);
+                    isConnectionValid = true; // Should only execute if connection succeeds.
+                } catch (SQLException innerException) {
+                    e = innerException;
+                }
+            }
         }
     }
 
-    public void setConnectionAddress(String address){
-        this.connectionAddress = address;
+    private Dialog<DatabaseInfo> dbErrorDialog(){
+        Dialog<DatabaseInfo> dialog = new Dialog<>();
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField databaseAddress = new TextField();
+        databaseAddress.setPromptText("Database Address");
+        TextField databaseName = new TextField();
+        databaseName.setPromptText("Database Name");
+        TextField username = new TextField();
+        username.setPromptText("Username");
+        PasswordField password = new PasswordField();
+        password.setPromptText("Password");
+
+        gridPane.add(databaseAddress, 1, 0);
+        gridPane.add(databaseName, 1, 1);
+        gridPane.add(username, 1, 2);
+        gridPane.add(password, 1, 3);
+        gridPane.add(new Text("Database Address: "), 0, 0);
+        gridPane.add(new Text("Database Name: "), 0, 1);
+        gridPane.add(new Text("Username: "), 0, 2);
+        gridPane.add(new Text("Password: "), 0, 3);
+
+        ButtonType ok = new ButtonType("Retry", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(ok, ButtonType.CANCEL);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == ok){
+                return new DatabaseInfo(
+                        databaseAddress.getText(),
+                        databaseName.getText(),
+                        username.getText(),
+                        password.getText()
+                );
+            }
+            return null;
+        });
+
+
+        dialog.getDialogPane().setContent(gridPane);
+
+        return dialog;
+
     }
 
-    public void printAllTransactions(){
-        String allTransactionsQuery =
-                "SELECT * FROM transaction, customer, employee " +
-                        "WHERE transaction.CustomerID = customer.CustomerID " +
-                        "AND transaction.EmployeeID = employee.EmployeeID";
-        query(allTransactionsQuery);
-    }
-
-    private void print(ResultSet resultSet) throws SQLException{
-        System.out.println("----------TRANSACTIONS----------");
-        while (resultSet.next()) {
-            System.out.println(resultSet.getString(5));
+    class DatabaseInfo{
+        public DatabaseInfo(String databaseAddress, String databaseName, String username, String password) {
+            this.databaseAddress = databaseAddress;
+            this.databaseName = databaseName;
+            this.username = username;
+            this.password = password;
         }
-        System.out.println("----------END TRANSACTIONS----------");
-    }
-
-    private void query(String sql){
-        try (Statement statement=connection.createStatement(
-                ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-             ResultSet resultSet = statement.executeQuery(sql);
-        ){
-            print(resultSet);
-        } catch (SQLException e){
-            System.out.println(e);
-        }
-    }
-
-    private void update(String sql){
-
-        try (Statement statement=connection.createStatement(
-                ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        ){
-           statement.execute(sql);
-        } catch (SQLException e){
-            System.out.println(e);
-        }
-    }
-
-    public void markTransaction(String transactionID, String quote, String invoice){
-        String sql = "UPDATE transaction SET Quote = ?, Invoice = ? WHERE `Transaction ID` =  ?";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, quote);
-            preparedStatement.setString(2, invoice);
-            preparedStatement.setString(3, transactionID);
-            System.out.println(preparedStatement);
-            System.out.println(
-                    preparedStatement.executeUpdate());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public void addCustomer(String firstName, String lastName, String businessName,
-                            String address, String city, String state,
-                            String zip, String phone, String email, String fax){
-        String sql = "INSERT INTO customer (`CustomerID`, `First`, `Last`, `BusinessName`, `Address`, `City`, `State`, `Zip`, `Phone`, `Email`, `Fax`) VALUES (NULL, '"+firstName+"', '"+lastName+"', '"+businessName+"', '"+address+"', '"+city+"', '"+state+"', '"+zip+"', '"+phone+"', '"+email+"', '"+fax+"');";
-        System.out.println("SQL_________________");
-        System.out.println(sql);
-        update(sql);
+        String databaseAddress;
+        String databaseName;
+        String username;
+        String password;
     }
 
     public void addEmployee(String firstName, String lastName,
                             String address, String city, String state,
                             String zip, String phone, String email){
-        String sql = "INSERT INTO `alexsupply`.`employee` (`EmployeeID`, `First`, `Last`, `Address`, `City`, `State`, `Zip`, `Phone`, `Email`) VALUES (NULL, '"+firstName+"', '"+lastName+"', '"+address+"', '"+city+"', '"+state+"', '"+zip+"', '"+phone+"', '"+email+"');";
-        System.out.println("SQL_________________");
-        System.out.println(sql);
-        update(sql);
-    }
-    public void addProduct(String name, String description, double price){
-        String sql ="INSERT INTO `alexsupply`.`product` (`ProductID`, `Name`, `Description`, `Price`) VALUES " +
-                "(NULL, '"+name+"', '"+description+"', '"+price+"');";
-        System.out.println("------------SQL------------");
-        System.out.println(sql);
-        update(sql);
+        //language=SQL
+        String sql = "INSERT INTO " +
+                "employee(First, Last, Address, City, State, Zip, Phone, Email)" +
+                " VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setString(3, address);
+            preparedStatement.setString(4, city);
+            preparedStatement.setString(5, state);
+            preparedStatement.setString(6, zip);
+            preparedStatement.setString(7, phone);
+            preparedStatement.setString(8, email);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            showExceptionAlert(e);
+        }
     }
 
-    public ObservableList<Customer> searchCustomer(String customerID, String first, String last, String businessName,
+    public void addCustomer(String firstName, String lastName, String businessName,
+                            String address, String city, String state,
+                            String zip, String phone, String email, String fax){
+        //language=SQL
+        String sql = "INSERT INTO " +
+                "customer(First, Last, BusinessName, Address, City, State, Zip, Phone, Email, Fax)" +
+                " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setString(3, businessName);
+            preparedStatement.setString(4, address);
+            preparedStatement.setString(5, city);
+            preparedStatement.setString(6, state);
+            preparedStatement.setString(7, zip);
+            preparedStatement.setString(8, phone);
+            preparedStatement.setString(9, email);
+            preparedStatement.setString(10, fax);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            showExceptionAlert(e);
+        }
+    }
+
+    private void showExceptionAlert(SQLException e){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("SQL Error");
+        alert.setTitle("Error code: " + e.getErrorCode());
+        alert.setContentText(e.getMessage());
+        alert.show();
+    }
+
+    public void addProduct(String name, String description, double price){
+        //language=SQL
+        String sql ="INSERT INTO product (Name, Description, Price) " +
+                "VALUES (?, ?, ?);";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, description);
+            preparedStatement.setDouble(3, price);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            showExceptionAlert(e);
+        }
+    }
+
+    public void markTransaction(int transactionID, Status quote, Status invoice){
+        //language=SQL
+        String sql = "UPDATE transaction SET Quote = ?, Invoice = ? WHERE TransactionID =  ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, quote.toString());
+            preparedStatement.setString(2, invoice.toString());
+            preparedStatement.setInt(3, transactionID);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            showExceptionAlert(e);
+        }
+
+    }
+
+
+
+
+
+
+    public ObservableList<Customer> searchCustomer(Integer customerID, String first, String last, String businessName,
                                String address, String city, String state, String zip,
                                String  phone, String email, String fax){
         String sql = "SELECT * FROM customer";
         ArrayList<String> arrayListStrings = new ArrayList<>();
 
-        if (isNotEmpty(customerID, first, last, businessName, address, city, state, zip, phone, email, fax)){
+        if (isNotEmpty(first, last, businessName, address, city, state, zip, phone, email, fax)){
             sql = sql + " WHERE ";
             String otherSQL = "";
-            if (!customerID.equals("")) {otherSQL = otherSQL + "AND customerID = ? "; arrayListStrings.add(customerID);}
+//            if (!(customerID == null)) {otherSQL = otherSQL + "AND customerID = ? "; arrayListStrings.add(customerID);}
             if (!first.equals("")) {otherSQL = otherSQL + "AND First = ? "; arrayListStrings.add(first); }
             if (!last.equals("")) { otherSQL = otherSQL + "AND Last = ? "; arrayListStrings.add(last); }
             if (!businessName.equals("")) {
@@ -160,6 +261,7 @@ public class DBConnection {
 
     }
     private boolean isNotEmpty(String... fields){
+        // Null equals empty
         for (String field : fields){
             if (!field.equals(""))
                 return true;
