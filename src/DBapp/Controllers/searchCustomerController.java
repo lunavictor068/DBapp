@@ -14,8 +14,7 @@ public class searchCustomerController {
     @FXML TableColumn<Customer, String> customerIDColumn, firstColumn, lastColumn, businessNameColumn, addressColumn,
             cityColumn, stateColumn, zipColumn, phoneColumn, emailColumn, faxColumn;
 
-    public void printTest(){
-        System.out.println("printtest");
+    public void searchCustomer(){
         customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("CustomerID"));
         firstColumn.setCellValueFactory(new PropertyValueFactory<>("first"));
         lastColumn.setCellValueFactory(new PropertyValueFactory<>("last"));
@@ -29,20 +28,18 @@ public class searchCustomerController {
         faxColumn.setCellValueFactory(new PropertyValueFactory<>("fax"));
         table.setItems(
                 ModelData.dbConnection.searchCustomer(
-                        AppUtils.integerNullify(customerIDField.getText()),
-                        // TODO - nullify the rest of the inputs.
-                        firstField.getText(),
-                        lastField.getText(),
-                        businessNameField.getText(),
-                        addressField.getText(),
-                        cityField.getText(),
-                        stateField.getText(),
-                        zipField.getText(),
-                        phoneField.getText(),
-                        emailField.getText(),
-                        faxField.getText())
+                        AppUtils.nullify(customerIDField.getText(), Integer.class),
+                        AppUtils.nullify(firstField.getText(), String.class),
+                        AppUtils.nullify(lastField.getText(), String.class),
+                        AppUtils.nullify(businessNameField.getText(), String.class),
+                        AppUtils.nullify(addressField.getText(), String.class),
+                        AppUtils.nullify(cityField.getText(), String.class),
+                        AppUtils.nullify(stateField.getText(), String.class),
+                        AppUtils.nullify(zipField.getText(), String.class),
+                        AppUtils.nullify(phoneField.getText(), String.class),
+                        AppUtils.nullify(emailField.getText(), String.class),
+                        AppUtils.nullify(faxField.getText(), String.class))
         );
-        System.out.println("end");
     }
 
 }

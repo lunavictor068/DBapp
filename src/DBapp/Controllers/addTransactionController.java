@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.text.Text;
 import javafx.util.converter.IntegerStringConverter;
 import javafx.util.converter.NumberStringConverter;
 
@@ -27,7 +28,7 @@ public class addTransactionController implements Initializable {
     @FXML TableColumn productIDTableColumn, nameTableColumn, descriptionTableColumn, priceTableColumn;
     @FXML TableColumn<TransactionProduct, Integer> quantityTableColumn;
     @FXML TableView<TransactionProduct> table;
-
+    @FXML Text message;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         productIDTableColumn.setCellValueFactory(new PropertyValueFactory<>("productID"));
@@ -56,7 +57,7 @@ public class addTransactionController implements Initializable {
     public void addItemRowClicked(){
         TransactionProduct selected = nameSearchField.getSelectionModel().getSelectedItem();
         if (selected == null){
-            System.out.println("No product selected!");
+            message.setText("No product selected!");
         }
         else {
             // check if item already in .
@@ -66,8 +67,8 @@ public class addTransactionController implements Initializable {
                 table.getItems().add(selected);
                 table.getSelectionModel().selectLast();
             } else {
-                System.out.println("Item already excists!!!11");
-                System.out.println("Adding selected quantity to the previous quantity.");
+                message.setText(selected + " is already in the table.\n" +
+                        "Added selected quantity to the previous quantity.");
                 TransactionProduct item = table.getItems().get(index);
                 item.setQuantity(item.getQuantity() + productQuantityBox.getSelectionModel().getSelectedItem());
                 table.getSelectionModel().select(index);
@@ -86,24 +87,9 @@ public class addTransactionController implements Initializable {
     }
     public void submitTransactionClicked(){
         if (table.getItems().isEmpty()){
-            System.out.println("Empty tale!!!!!!111!!");
+            message.setText("The table is empty. Please add items to the table in order to submit the transaction.");
         }
         else {
-            System.out.println("Customer ID: " + getCustomerID());
-            System.out.println("Quote status: "+quoteBox.getSelectionModel().getSelectedItem());
-            System.out.println("Invoice status: "+invoiceBox.getSelectionModel().getSelectedItem());
-            System.out.println("Table contents:");
-            Iterator items = table.getItems().iterator();
-            System.out.println("-----Start TABLE CONTENTS-----");
-            while (items.hasNext()){
-                TransactionProduct transactionProduct = (TransactionProduct) items.next();
-                System.out.println("\tProductID: "+transactionProduct.getProductID() +
-                       " Name: "+transactionProduct.getName()+
-                        " Description: "+transactionProduct.getDescription()+
-                       " Price: "+ transactionProduct.getPrice() +
-                       " Quantity: "+transactionProduct.getQuantity());
-        }
-        System.out.println("-----END TABLE CONTENTS-----");
             try {
                 ModelData.dbConnection.newTransaction(
                         quoteBox.getSelectionModel().getSelectedItem(),
@@ -114,7 +100,10 @@ public class addTransactionController implements Initializable {
                 );
             }
             catch (Exception e){
-                System.err.println(e);
+                AppUtils.displayAlert(
+                        "Error",
+                        "Something is wrong.",
+                        e.getMessage());
             }
             clearAll();
         }
@@ -130,11 +119,22 @@ public class addTransactionController implements Initializable {
 
     private int getCustomerID(){
         if (customerID.getText().equals("")){
+            message.setText("No customer ID was provided.\n" +
+                    "Using guest account.");
             return 1;
         }
         else {
+            try{
             return Integer.parseInt(this.customerID.getText());
+            } catch (NumberFormatException e) {
+                message.setText(
+                        "A number is needed.\n"+
+                        customerID.getText() + " is not an integer.\n"+
+                        "Guest account will be used."
+                );
+            }
         }
+        return 1;
     }
 
     private void clearAll(){

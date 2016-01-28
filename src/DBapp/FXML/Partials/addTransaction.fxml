@@ -6,12 +6,17 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DBapp.Controllers.addTransactionController">
+<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DBapp.Controllers.addTransactionController">
    <content>
       <BorderPane>
          <bottom>
             <VBox BorderPane.alignment="CENTER">
                <children>
+                  <TextFlow>
+                     <children>
+                        <Text fx:id="message" strokeType="OUTSIDE" strokeWidth="0.0" />
+                     </children>
+                  </TextFlow>
                   <HBox alignment="CENTER" spacing="10.0">
                      <children>
                         <TextFlow>

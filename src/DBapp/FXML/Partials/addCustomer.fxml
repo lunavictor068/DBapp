@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 
 
-<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DBapp.Controllers.newCustomerController">
+<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DBapp.Controllers.addCustomerController">
    <content>
       <BorderPane>
          <center>

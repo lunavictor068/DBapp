@@ -9,7 +9,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Optional;
 
 
@@ -21,7 +20,7 @@ public class DBConnection {
         String completeAddress;
         String driver = "jdbc:mysql://";
         String databaseAddress = "localhost";
-        String databaseName = "alexdb";
+        String databaseName = "alex5db";
         String username = "dbuser";
         String password = "password";
         try {
@@ -190,7 +189,7 @@ public class DBConnection {
         }
     }
 
-    public void markTransaction(int transactionID, Status quote, Status invoice){
+    public void markTransaction(int transactionID, Status.Quote quote, Status.Invoice invoice){
         //language=SQL
         String sql = "UPDATE transaction SET Quote = ?, Invoice = ? WHERE TransactionID =  ?";
         try {
@@ -205,8 +204,24 @@ public class DBConnection {
 
     }
 
+private <T> void setSQL(T input, PreparedStatement statement, int index) {
+    try {
+        if (input.getClass().equals(String.class))
+            statement.setString(index,
+                    (String) input.getClass().getConstructor().newInstance(input));
+        if (input.getClass().equals(Integer.class))
+            statement.setInt(index,
+                    (Integer) input.getClass().getConstructor().newInstance(input));
+        if (input.getClass().equals(Double.class))
+            statement.setDouble(index,
+                    (Double) input.getClass().getConstructor().newInstance(input));
+    } catch (SQLException e) {
+        showExceptionAlert(e);
+    } catch (Exception e){
+        e.printStackTrace();
+    }
 
-
+}
 
 
 
@@ -214,44 +229,41 @@ public class DBConnection {
                                String address, String city, String state, String zip,
                                String  phone, String email, String fax){
         String sql = "SELECT * FROM customer";
-        ArrayList<String> arrayListStrings = new ArrayList<>();
 
-        if (isNotEmpty(first, last, businessName, address, city, state, zip, phone, email, fax)){
+        if (isNotEmpty(customerID, first, last, businessName, address, city, state, zip, phone, email, fax)){
             sql = sql + " WHERE ";
             String otherSQL = "";
-//            if (!(customerID == null)) {otherSQL = otherSQL + "AND customerID = ? "; arrayListStrings.add(customerID);}
-            if (!first.equals("")) {otherSQL = otherSQL + "AND First = ? "; arrayListStrings.add(first); }
-            if (!last.equals("")) { otherSQL = otherSQL + "AND Last = ? "; arrayListStrings.add(last); }
-            if (!businessName.equals("")) {
-                otherSQL = otherSQL + "AND BusinessName = ? "; arrayListStrings.add(businessName);
-            }
-            if (!address.equals("")) { otherSQL = otherSQL + "AND Address = ? "; arrayListStrings.add(address); }
-            if (!city.equals("")) { otherSQL = otherSQL + "AND City = ? "; arrayListStrings.add(city); }
-            if (!state.equals("")) { otherSQL = otherSQL + "AND State = ? "; arrayListStrings.add(state); }
-            if (!zip.equals("")) { otherSQL = otherSQL + "AND Zip = ? "; arrayListStrings.add(zip); }
-            if (!phone.equals("")) { otherSQL = otherSQL + "AND Phone = ? "; arrayListStrings.add(phone); }
-            if (!email.equals("")){  otherSQL = otherSQL + "AND Email = ? "; arrayListStrings.add(email); }
-            if (!fax.equals("")) { otherSQL = otherSQL + "AND Fax = ? "; arrayListStrings.add(fax); }
-
+            if (!(customerID == null)) {otherSQL = otherSQL + "AND customerID = ? ";}
+            if (!(first == null)) { otherSQL = otherSQL + "AND First = ? "; }
+            if (!(last == null)) { otherSQL = otherSQL + "AND Last = ? "; }
+            if (!(businessName == null)) { otherSQL = otherSQL + "AND BusinessName = ? "; }
+            if (!(address == null)) { otherSQL = otherSQL + "AND Address = ? ";}
+            if (!(city == null)) { otherSQL = otherSQL + "AND City = ? ";}
+            if (!(state == null)) { otherSQL = otherSQL + "AND State = ? ";  }
+            if (!(zip == null)) { otherSQL = otherSQL + "AND Zip = ? "; }
+            if (!(phone == null)) { otherSQL = otherSQL + "AND Phone = ? "; }
+            if (!(email == null)){  otherSQL = otherSQL + "AND Email = ? ";  }
+            if (!(fax == null)) { otherSQL = otherSQL + "AND Fax = ? ";  }
             otherSQL = otherSQL.substring(4).trim();
-            System.out.println("Other SQL: "+otherSQL);
             sql = sql + otherSQL;
-
         }
 
-        System.out.println("Final SQL: "+ sql);
-        System.out.println("Arraylist size: "+arrayListStrings.size());
-        System.out.println("\tList contents: ");
-        for (String s : arrayListStrings)
-            System.out.println("\t\t- "+s);
-                // TODO All of this... construct sql statement with AND and te rest of stuffs...
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            int indexCounter = 1;
-            for (String s : arrayListStrings) {
-                statement.setString(indexCounter, s);
-                indexCounter++;
-            }
+
+            int index = 1;
+            if (!(customerID == null)) {setSQL(customerID, statement, index); index++;}
+            if (!(first == null)) { setSQL(customerID, statement, index); index++; }
+            if (!(last == null)) { setSQL(customerID, statement, index); index++; }
+            if (!(businessName == null)) { setSQL(customerID, statement, index); index++; }
+            if (!(address == null)) { setSQL(customerID, statement, index); index++;}
+            if (!(city == null)) { setSQL(customerID, statement, index); index++;}
+            if (!(state == null)) { setSQL(customerID, statement, index); index++;  }
+            if (!(zip == null)) { setSQL(customerID, statement, index); index++; }
+            if (!(phone == null)) { setSQL(customerID, statement, index); index++; }
+            if (!(email == null)){  setSQL(customerID, statement, index); index++;  }
+            if (!(fax == null)) { setSQL(customerID, statement, index);  }
+
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -260,10 +272,11 @@ public class DBConnection {
         return customersObservable();
 
     }
-    private boolean isNotEmpty(String... fields){
+    @SuppressWarnings("unchecked")
+    private boolean isNotEmpty(Object... fields){
         // Null equals empty
-        for (String field : fields){
-            if (!field.equals(""))
+        for (Object field : fields){
+            if (!(field == null))
                 return true;
         }
         return false;
@@ -288,7 +301,7 @@ public class DBConnection {
                 );
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            showExceptionAlert(e);
         }
         return customers;
 
@@ -315,6 +328,7 @@ public class DBConnection {
         return products;
     }
      // Transaction ProductProducts stuffs
+    @SuppressWarnings("SpellCheckingInspection")
     private ObservableList<TransactionProduct> transactionproductObservable(){
         ObservableList<TransactionProduct> products = FXCollections.observableArrayList();
         try {
@@ -333,50 +347,41 @@ public class DBConnection {
         return products;
     }
 
-    public ObservableList<Product> searchProduct(String productID, String name, String description, String price){
+    public ObservableList<Product> searchProduct(Integer productID, String name, String description, Double price){
         String sql = "SELECT * FROM product";
-        ArrayList<String> arrayListStrings = new ArrayList<>();
-
         if (isNotEmpty(productID, name, description, price)){
             sql = sql + " WHERE ";
             String otherSQL = "";
-            if (!productID.equals("")) {otherSQL = otherSQL + "AND ProductID = ? "; arrayListStrings.add(productID);}
-            if (!name.equals("")) {otherSQL = otherSQL + "AND Name = ? "; arrayListStrings.add(name); }
-            if (!description.equals("")) { otherSQL = otherSQL + "AND Description = ? "; arrayListStrings.add(description); }
-            if (!price.equals("")) { otherSQL = otherSQL + "AND Price = ? "; arrayListStrings.add(price); }
+            if (!(productID == null)) {otherSQL = otherSQL + "AND ProductID = ? ";}
+            if (!(name == null)) {otherSQL = otherSQL + "AND Name = ? "; }
+            if (!(description == null)) { otherSQL = otherSQL + "AND Description = ? ";  }
+            if (!(price == null)) { otherSQL = otherSQL + "AND Price = ? ";}
 
             otherSQL = otherSQL.substring(4).trim();
-            System.out.println("Other SQL: "+otherSQL);
             sql = sql + otherSQL;
-
         }
 
-        System.out.println("Final SQL: "+ sql);
-        System.out.println("Arraylist size: "+arrayListStrings.size());
-        System.out.println("\tList contents: ");
-        for (String s : arrayListStrings)
-            System.out.println("\t\t- "+s);
-        // TODO All of this... construct sql statement with AND and te rest of stuffs...
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            int indexCounter = 1;
-            for (String s : arrayListStrings) {
-                statement.setString(indexCounter, s);
-                indexCounter++;
-            }
+            int index = 1;
+            if (!(productID == null)) {setSQL(productID, statement, index); index++;}
+            if (!(name == null)) {setSQL(name, statement, index); index++;}
+            if (!(description == null)) { setSQL(description, statement, index); index++; }
+            if (!(price == null)) { setSQL(price, statement, index);}
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
-            e.printStackTrace();
+            showExceptionAlert(e);
         }
         return productObservable();
     }
+
     public ObservableList<TransactionProduct> getAllProducts(){
         String sql = "SELECT * FROM product";
         try{
             PreparedStatement statement = connection.prepareStatement(sql);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
-            e.printStackTrace();
+            showExceptionAlert(e);
         }
         return transactionproductObservable();
     }
@@ -399,88 +404,74 @@ public class DBConnection {
         return transactions;
     }
 
-    public ObservableList<Transaction> searchTransactions(String transactionID, String quote, String invoice, String customerID, String employeeID){
+    public ObservableList<Transaction> searchTransactions(Integer transactionID, String quote, String invoice, Integer customerID, Integer employeeID){
         String sql = "SELECT * FROM transaction";
-        ArrayList<String> arrayListStrings = new ArrayList<>();
-
-        System.out.println(transactionID + quote + invoice + customerID+ employeeID);
         if (isNotEmpty(transactionID, quote, invoice, customerID, employeeID)){
             sql = sql + " WHERE ";
             String otherSQL = "";
-            if (!transactionID.equals("")) {otherSQL = otherSQL + "AND `Transaction ID` = ? "; arrayListStrings.add(transactionID);}
-            if (!quote.equals("")) {otherSQL = otherSQL + "AND Quote = ? "; arrayListStrings.add(quote);}
-            if (!invoice.equals("")) {otherSQL = otherSQL + "AND Invoice = ? "; arrayListStrings.add(invoice); }
-            if (!customerID.equals("")) { otherSQL = otherSQL + "AND CustomerID = ? "; arrayListStrings.add(customerID); }
-            if (!employeeID.equals("")) { otherSQL = otherSQL + "AND EmployeeID = ? "; arrayListStrings.add(employeeID); }
+            if (!transactionID.equals("")) {otherSQL = otherSQL + "AND `Transaction ID` = ? ";}
+            if (!quote.equals("")) {otherSQL = otherSQL + "AND Quote = ? ";}
+            if (!invoice.equals("")) {otherSQL = otherSQL + "AND Invoice = ? ";}
+            if (!customerID.equals("")) { otherSQL = otherSQL + "AND CustomerID = ? "; }
 
             otherSQL = otherSQL.substring(4).trim();
-            System.out.println("Other SQL: "+otherSQL);
             sql = sql + otherSQL;
 
         }
 
-        System.out.println("Final SQL: "+ sql);
-        System.out.println("Arraylist size: "+arrayListStrings.size());
-        System.out.println("\tList contents: ");
-        for (String s : arrayListStrings)
-            System.out.println("\t\t- "+s);
-        // TODO All of this... construct sql statement with AND and te rest of stuffs...
+
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            int indexCounter = 1;
-            for (String s : arrayListStrings) {
-                statement.setString(indexCounter, s);
-                indexCounter++;
-            }
+            int index = 1;
+            if (!transactionID.equals("")) {setSQL(transactionID, statement, index); index++;}
+            if (!quote.equals("")) {setSQL(transactionID, statement, index); index++;}
+            if (!invoice.equals("")) {setSQL(transactionID, statement, index); index++;}
+            if (!customerID.equals("")) { setSQL(transactionID, statement, index); }
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
-            e.printStackTrace();
+            showExceptionAlert(e);
         }
         return transactionObservable();
     }
 
     // Employee stuffs
-    public ObservableList<Employee> searchEmployee(String employeeID, String first, String last,
+    public ObservableList<Employee> searchEmployee(Integer employeeID, String first, String last,
                                                    String address, String city, String state, String zip,
                                                    String  phone, String email){
         String sql = "SELECT * FROM employee";
-        ArrayList<String> arrayListStrings = new ArrayList<>();
-
         if (isNotEmpty(employeeID, first, last, address, city, state, zip, phone, email)){
             sql = sql + " WHERE ";
             String otherSQL = "";
-            if (!employeeID.equals("")) {otherSQL = otherSQL + "AND employeeID = ? "; arrayListStrings.add(employeeID);}
-            if (!first.equals("")) {otherSQL = otherSQL + "AND First = ? "; arrayListStrings.add(first); }
-            if (!last.equals("")) { otherSQL = otherSQL + "AND Last = ? "; arrayListStrings.add(last); }
-            if (!address.equals("")) { otherSQL = otherSQL + "AND Address = ? "; arrayListStrings.add(address); }
-            if (!city.equals("")) { otherSQL = otherSQL + "AND City = ? "; arrayListStrings.add(city); }
-            if (!state.equals("")) { otherSQL = otherSQL + "AND State = ? "; arrayListStrings.add(state); }
-            if (!zip.equals("")) { otherSQL = otherSQL + "AND Zip = ? "; arrayListStrings.add(zip); }
-            if (!phone.equals("")) { otherSQL = otherSQL + "AND Phone = ? "; arrayListStrings.add(phone); }
-            if (!email.equals("")){  otherSQL = otherSQL + "AND Email = ? "; arrayListStrings.add(email); }
+            if (!(employeeID == null)) {otherSQL = otherSQL + "AND employeeID = ? ";}
+            if (!(first == null)) {otherSQL = otherSQL + "AND First = ? "; }
+            if (!(last == null)) { otherSQL = otherSQL + "AND Last = ? ";  }
+            if (!(address == null)) { otherSQL = otherSQL + "AND Address = ? "; }
+            if (!(city == null)) { otherSQL = otherSQL + "AND City = ? "; }
+            if (!(state == null)) { otherSQL = otherSQL + "AND State = ? "; }
+            if (!(zip == null)) { otherSQL = otherSQL + "AND Zip = ? ";}
+            if (!(phone == null)) { otherSQL = otherSQL + "AND Phone = ? "; }
+            if (!(email == null)){  otherSQL = otherSQL + "AND Email = ? "; }
 
             otherSQL = otherSQL.substring(4).trim();
-            System.out.println("Other SQL: "+otherSQL);
             sql = sql + otherSQL;
 
         }
 
-        System.out.println("Final SQL: "+ sql);
-        System.out.println("Arraylist size: "+arrayListStrings.size());
-        System.out.println("\tList contents: ");
-        for (String s : arrayListStrings)
-            System.out.println("\t\t- "+s);
-        // TODO All of this... construct sql statement with AND and te rest of stuffs...
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            int indexCounter = 1;
-            for (String s : arrayListStrings) {
-                statement.setString(indexCounter, s);
-                indexCounter++;
-            }
+            int index = 1;
+            if (!(employeeID == null)) {setSQL(employeeID, statement, index); index++;}
+            if (!(first == null)) {setSQL(employeeID, statement, index); index++;}
+            if (!(last == null)) {setSQL(employeeID, statement, index); index++;}
+            if (!(address == null)) {setSQL(employeeID, statement, index); index++; }
+            if (!(city == null)) {setSQL(employeeID, statement, index); index++;}
+            if (!(state == null)) {setSQL(employeeID, statement, index); index++;}
+            if (!(zip == null)) { setSQL(employeeID, statement, index); index++;}
+            if (!(phone == null)) { setSQL(employeeID, statement, index); index++; }
+            if (!(email == null)){setSQL(employeeID, statement, index); }
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
-            e.printStackTrace();
+showExceptionAlert(e);
         }
 
         return employeeObservable();
@@ -503,21 +494,17 @@ public class DBConnection {
                 );
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        // TODO other stuff
+showExceptionAlert(e);        }
         return employees;
     }
 // End Employee stuffs
 // New transaction
     public void newTransaction(Status.Quote quote, Status.Invoice invoice, int customerID, int employeeID, ObservableList<TransactionProduct> transactionProducts) throws Exception{
         connection.setAutoCommit(false);
-        String transactionSQL =
-                "INSERT INTO transaction (`Transaction ID`, `Quote`, `Invoice`, `CustomerID`, `EmployeeID`) VALUES (NULL,?,?,?,?)";
         //language=SQL
-        String string = "INSERT INTO transaction (Quote, Invoice, CustomerID, EmployeeID) VALUES (?,?,?,?)";
-        System.out.println(string);
-        PreparedStatement transactionStatement = connection.prepareStatement(string, Statement.RETURN_GENERATED_KEYS);
+        String transactionSQL = "INSERT INTO transaction (Quote, Invoice, CustomerID, EmployeeID) VALUES (?,?,?,?)";
+        System.out.println(transactionSQL);
+        PreparedStatement transactionStatement = connection.prepareStatement(transactionSQL, Statement.RETURN_GENERATED_KEYS);
         System.out.println("Preparing statement");
         System.out.println(quote.toString());
         System.out.println(invoice.toString());
@@ -525,10 +512,6 @@ public class DBConnection {
         transactionStatement.setString(2, invoice.toString());
         transactionStatement.setInt(3, customerID);
         transactionStatement.setInt(4, employeeID);
-//        transactionStatement.setString(1, quote.toString());
-//        transactionStatement.setString(2, invoice.toString());
-//        transactionStatement.setString(3, Integer.toString(customerID));
-//        transactionStatement.setString(4, Integer.toString(employeeID));
         System.out.println("Excecuting update");
         transactionStatement.executeUpdate();
         System.out.println("Update excecuted");

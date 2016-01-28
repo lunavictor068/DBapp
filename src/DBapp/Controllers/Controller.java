@@ -34,19 +34,8 @@ public class Controller implements Initializable{
     }
 
     private void loadCenterPartial(String fxmlName){
-        // TODO Correct jar nullpointer exception
-        System.out.println("loadcenter");
-        URL url = Main.class.getResource("FXML/Partials/"+ fxmlName +".fxml");
-//        URL url = getClass().getResource("lol.txt");
-        System.out.println(1);
-        System.out.println(getClass().getResourceAsStream("../FXML/Partials/"+ fxmlName +".fxml"));
-        System.out.println(url);
-        System.out.println("2");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("../FXML/Partials/"+ fxmlName +".fxml"));
-        fxmlLoader.setLocation(url);
-        fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
         try {
-            borderPane.setCenter((Node) fxmlLoader.load(Main.class.getResource("FXML/Partials/"+ fxmlName +".fxml")));
+            borderPane.setCenter( FXMLLoader.load(Main.class.getResource("FXML/Partials/"+ fxmlName +".fxml")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,23 +43,19 @@ public class Controller implements Initializable{
 
     // Load BorderPane center partials.
     public void newTransaction(){
-        //TODO correct layout
-        loadCenterPartial("transactions2");
+        loadCenterPartial("addTransaction");
     }
     public void mark(){
         loadCenterPartial("mark");
     }
 
     public void addCustomer(){
-        //TODO correct layout
-        loadCenterPartial("newCustomer");
+        loadCenterPartial("addCustomer");
     }
     public void addEmployee(){
-        //TODO correct layout
         loadCenterPartial("addEmployee");
     }
     public void addProduct(){
-        //TODO correct layout
         loadCenterPartial("addProduct");
     }
 

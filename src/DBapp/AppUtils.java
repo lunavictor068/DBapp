@@ -11,38 +11,23 @@ import java.io.FileNotFoundException;
 
 public class AppUtils {
 
-    public static void clearTextFields(TextField... textFields){
-        for (TextField textField:textFields)
+    public static void clearTextFields(TextField... textFields) {
+        for (TextField textField : textFields)
             textField.clear();
     }
 
-    public static Integer integerNullify(String input){
-        if (input.equals("")) return null;
-        else {
-            try {
-                return Integer.parseInt(input);
+    public static <T> T nullify(String input, Class<T> returnType) {
+        try {
+            if (input.equals("")) return null;
+            else {
+                return returnType.getConstructor(String.class).newInstance(input);
             }
-            catch (NumberFormatException e){
-                displayAlert("Not an integer!", "Please enter an integer.", e.getMessage());
-            }
+        } catch (Exception e) {
+            displayAlert(
+                    "Error",
+                    "An error occurred. Action will continue without input \"" + input +"\".",
+                    e.getMessage());
         }
-        return null;
-    }
-
-    public static String stringNullify(String input){
-        if (input.equals("")) return null;
-        else return input;
-    }
-
-    public static Double doubleNullify(String input){
-        if (input.equals("")) return null;
-        else
-            try{
-                return Double.parseDouble(input);
-            }
-            catch (NumberFormatException e){
-                displayAlert("Not a number!!", "Please enter a number.", e.getMessage());
-            }
         return null;
     }
 
@@ -55,8 +40,24 @@ public class AppUtils {
 
     }
 
+    public static boolean isEmpty(TextField textField){
+        return textField.getText().equals("");
+    }
 
-    private static void print(){
+    public static boolean validify(TextField... textFields){
+        boolean valid = true;
+        for (TextField textField : textFields){
+            if (isEmpty(textField)) {
+                textField.setStyle("-fx-border-color: red;");
+                valid = false;
+            }
+            else textField.setStyle("");
+        }
+        return valid;
+    }
+
+
+    private static void print() {
         // TODO - FINISH
         try {
             DocFlavor flavor = DocFlavor.INPUT_STREAM.AUTOSENSE;

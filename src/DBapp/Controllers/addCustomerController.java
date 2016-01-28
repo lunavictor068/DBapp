@@ -6,23 +6,29 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import DBapp.Main;
 import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class addEmployeeController implements Initializable{
-    @FXML TextField first, last, address, city, state, zip, phone, email;
+
+public class addCustomerController implements Initializable {
+    @FXML TextField first, last, businessName, address, city, state, zip, phone, email, fax;
     @FXML Button submit;
     @FXML Text message;
+    @Override public void initialize(URL location, ResourceBundle resources) {
 
-    public void addEmployee(){
-        if (AppUtils.validify(first, last, address, city, state, zip, phone, email)) {
-            ModelData.dbConnection.addEmployee(
-                    first.getText(), last.getText(), address.getText(),
+    }
+
+    public void addCustomer() {
+        if (AppUtils.validify(first, last, businessName, address, city, state, zip, phone, email)) {
+            ModelData.dbConnection.addCustomer(
+                    first.getText(), last.getText(), businessName.getText(), address.getText(),
                     city.getText(), state.getText(), zip.getText(), phone.getText(),
-                    email.getText());
-            message.setText("Added new employee.");
+                    email.getText(), fax.getText()
+            );
+            message.setText("Added " + first.getText() + " " + last.getText() + " from " + businessName.getText());
             clearFields();
         }
         else {
@@ -33,17 +39,13 @@ public class addEmployeeController implements Initializable{
     private void clearFields(){
         first.clear();
         last.clear();
+        businessName.clear();
         address.clear();
         city.clear();
         state.clear();
         zip.clear();
         phone.clear();
         email.clear();
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        first.setStyle("-fx-border-color: red;");
-        first.setStyle("");
+        fax.clear();
     }
 }

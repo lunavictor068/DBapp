@@ -1,9 +1,6 @@
 package DBapp.Controllers;
 
-import DBapp.Customer;
-import DBapp.Employee;
-import DBapp.Main;
-import DBapp.ModelData;
+import DBapp.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -26,27 +23,22 @@ public class searchEmployeeController implements Initializable{
             cityColumn, stateColumn, zipColumn, phoneColumn, emailColumn;
 
     public void searchCustomerClick(){
-        System.out.println("Setting items");
         table.setItems(
                 ModelData.dbConnection.searchEmployee(
-                        employeeIDField.getText(),
-                        firstField.getText(),
-                        lastField.getText(),
-                        addressField.getText(),
-                        cityField.getText(),
-                        stateField.getText(),
-                        zipField.getText(),
-                        phoneField.getText(),
-                        emailField.getText()
-        ));
-        System.out.println("end");
-
+                        AppUtils.nullify(employeeIDField.getText(), Integer.class),
+                        AppUtils.nullify(firstField.getText(), String.class),
+                        AppUtils.nullify(lastField.getText(), String.class),
+                        AppUtils.nullify(addressField.getText(), String.class),
+                        AppUtils.nullify(cityField.getText(), String.class),
+                        AppUtils.nullify(stateField.getText(), String.class),
+                        AppUtils.nullify(zipField.getText(), String.class),
+                        AppUtils.nullify(phoneField.getText(), String.class),
+                        AppUtils.nullify(emailField.getText(), String.class)));
     }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("Setting columns");
         customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("employeeID"));
         firstColumn.setCellValueFactory(new PropertyValueFactory<>("first"));
         lastColumn.setCellValueFactory(new PropertyValueFactory<>("last"));

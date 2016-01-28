@@ -1,9 +1,6 @@
 package DBapp.Controllers;
 
-import DBapp.Employee;
-import DBapp.Main;
-import DBapp.ModelData;
-import DBapp.Product;
+import DBapp.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -28,12 +25,10 @@ public class searchProductController {
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         table.setItems(
                 ModelData.dbConnection.searchProduct(
-                        productIDField.getText(),
-                        nameField.getText(),
-                        descriptionField.getText(),
-                        priceField.getText()));
-        System.out.println("end");
-
+                        AppUtils.nullify(productIDField.getText(), Integer.class),
+                        AppUtils.nullify(nameField.getText(), String.class),
+                        AppUtils.nullify(descriptionField.getText(), String.class),
+                        AppUtils.nullify(priceField.getText(), Double.class)));
     }
 
 }
