@@ -85,11 +85,11 @@
       </TableView>
       <TableView fx:id="productTable" layoutX="10.0" layoutY="127.0">
          <columns>
-            <TableColumn fx:id="transactionIDTColumn1" prefWidth="144.0" text="Product ID" />
-            <TableColumn fx:id="quoteTColumn1" prefWidth="130.0" text="Name" />
-            <TableColumn fx:id="invoiceTColumn1" prefWidth="89.0" text="Description" />
-            <TableColumn fx:id="customerIDTColumn1" prefWidth="102.0" text="Price" />
-            <TableColumn fx:id="employeeIDTColumn1" prefWidth="134.0" text="Quantity" />
+            <TableColumn fx:id="productIDTColumn" prefWidth="144.0" text="Product ID" />
+            <TableColumn fx:id="nameTColumn" prefWidth="130.0" text="Name" />
+            <TableColumn fx:id="descriptionTColumn" prefWidth="89.0" text="Description" />
+            <TableColumn fx:id="priceIDTColumn" prefWidth="102.0" text="Price" />
+            <TableColumn fx:id="quantityIDTColumn" prefWidth="134.0" text="Quantity" />
          </columns>
       </TableView>
        <TextFlow>

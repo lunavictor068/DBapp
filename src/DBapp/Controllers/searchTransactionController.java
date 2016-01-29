@@ -18,14 +18,34 @@ public class searchTransactionController implements Initializable{
     @FXML TextField transactionIDField, customerIDField, employeeIDField;
     @FXML ChoiceBox<Status.Quote> quoteBox;
     @FXML ChoiceBox<Status.Invoice> invoiceBox;
-// TODO - Finish both tableViews
-    public void searchTransactionClick(){
+    @FXML TableColumn<TransactionProduct, Integer> productIDTColumn, quantityIDTColumn;
+    @FXML TableColumn<TransactionProduct, String> nameTColumn, descriptionTColumn;
+    @FXML TableColumn<TransactionProduct, Double> priceIDTColumn;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         transactionIDTColumn.setCellValueFactory(new PropertyValueFactory<>("transactionID"));
         quoteTColumn.setCellValueFactory(new PropertyValueFactory<>("quote"));
         invoiceTColumn.setCellValueFactory(new PropertyValueFactory<>("invoice"));
         customerIDTColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         employeeIDTColumn.setCellValueFactory(new PropertyValueFactory<>("employeeID"));
+        // TransactionProduct table
+        productIDTColumn.setCellValueFactory(new PropertyValueFactory<>("productID"));
+        quantityIDTColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        nameTColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        descriptionTColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        priceIDTColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        transactionTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null)
+                productTable.setItems(ModelData.dbConnection.searchOrderItems(newValue));
+        });
+        quoteBox.getItems().addAll(Status.Quote.values());
+        quoteBox.getItems().add(null);
+        invoiceBox.getItems().addAll(Status.Invoice.values());
+        invoiceBox.getItems().add(null);
+    }
 
+    public void searchTransactionClick(){
         transactionTable.setItems(
                 ModelData.dbConnection.searchTransactions(
                         AppUtils.nullify(transactionIDField.getText(), Integer.class),
@@ -35,15 +55,4 @@ public class searchTransactionController implements Initializable{
                         AppUtils.nullify(employeeIDField.getText(), Integer.class)));
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        transactionTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null)
-                System.out.println(newValue.getCustomerID() + " " +newValue.getInvoice()+ " " +newValue.getQuote());
-        });
-        quoteBox.getItems().addAll(Status.Quote.values());
-        quoteBox.getItems().add(null);
-        invoiceBox.getItems().addAll(Status.Invoice.values());
-        invoiceBox.getItems().add(null);
-    }
 }

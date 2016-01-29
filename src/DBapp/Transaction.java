@@ -2,7 +2,7 @@ package DBapp;
 
 
 public class Transaction {
-    public Transaction(String transactionID, String quote, String invoice, String customerID, String employeeID) {
+    public Transaction(Integer transactionID, Status.Quote quote, Status.Invoice invoice, Integer customerID, Integer employeeID) {
         this.transactionID = transactionID;
         this.quote = quote;
         this.invoice = invoice;
@@ -10,49 +10,49 @@ public class Transaction {
         this.employeeID = employeeID;
     }
 
-    public String getTransactionID() {
+    public Integer getTransactionID() {
         return transactionID;
     }
 
-    public void setTransactionID(String transactionID) {
+    public void setTransactionID(Integer transactionID) {
         this.transactionID = transactionID;
     }
 
-    public String getQuote() {
+    public Status.Quote getQuote() {
         return quote;
     }
 
-    public void setQuote(String quote) {
+    public void setQuote(Status.Quote quote) {
         this.quote = quote;
     }
 
-    public String getInvoice() {
+    public Status.Invoice getInvoice() {
         return invoice;
     }
 
-    public void setInvoice(String invoice) {
+    public void setInvoice(Status.Invoice invoice) {
         this.invoice = invoice;
     }
 
-    public String getCustomerID() {
+    public Integer getCustomerID() {
         return customerID;
     }
 
-    public void setCustomerID(String customerID) {
+    public void setCustomerID(Integer customerID) {
         this.customerID = customerID;
     }
 
-    public String getEmployeeID() {
+    public Integer getEmployeeID() {
         return employeeID;
     }
 
-    public void setEmployeeID(String employeeID) {
+    public void setEmployeeID(Integer employeeID) {
         this.employeeID = employeeID;
     }
 
-    String transactionID;
-    String quote;
-    String invoice;
-    String customerID;
-    String employeeID;
+    Integer transactionID;
+    Status.Quote quote;
+    Status.Invoice invoice;
+    Integer customerID;
+    Integer employeeID;
 }

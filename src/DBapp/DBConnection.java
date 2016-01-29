@@ -226,7 +226,34 @@ private <T> void setSQL(T input, PreparedStatement statement, int index) {
 
 }
 
+public ObservableList<TransactionProduct> searchOrderItems(Transaction transaction){
+    //language=SQL
+    String sql = "SELECT product.ProductID, Name, Description, Price, Quantity " +
+            "FROM orderitem " +
+            "LEFT JOIN product " +
+            "ON orderitem.ProductID = product.ProductID " +
+            "WHERE TransactionID = ?";
+    ResultSet resultSet;
+    ObservableList<TransactionProduct> transactionProducts = FXCollections.observableArrayList();
+    try {
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, transaction.getTransactionID());
+        resultSet = preparedStatement.executeQuery();
+    while (resultSet.next()){
+        transactionProducts.add(new TransactionProduct(
+                resultSet.getInt("ProductID"),
+                resultSet.getString("Name"),
+                resultSet.getString("Description"),
+                resultSet.getDouble("Price"),
+                resultSet.getInt("Quantity")
+        ));
+    }
+    } catch (SQLException e) {
+        showExceptionAlert(e);
+    }
+    return transactionProducts;
 
+}
 
     public ObservableList<Customer> searchCustomer(Integer customerID, String first, String last, String businessName,
                                String address, String city, String state, String zip,
@@ -340,10 +367,10 @@ private <T> void setSQL(T input, PreparedStatement statement, int index) {
         try {
             while (resultSet.next()){
                 products.add(new Product(
-                        resultSet.getString("ProductID"),
+                        resultSet.getInt("ProductID"),
                         resultSet.getString("Name"),
                         resultSet.getString("Description"),
-                        resultSet.getString("Price"))
+                        resultSet.getDouble("Price"))
                 );
             }
         } catch (SQLException e) {
@@ -358,10 +385,10 @@ private <T> void setSQL(T input, PreparedStatement statement, int index) {
         try {
             while (resultSet.next()){
                 products.add(new TransactionProduct(
-                        resultSet.getString("ProductID"),
+                        resultSet.getInt("ProductID"),
                         resultSet.getString("Name"),
                         resultSet.getString("Description"),
-                        resultSet.getString("Price"),
+                        resultSet.getDouble("Price"),
                                 1
                         ));
             }
@@ -415,11 +442,11 @@ private <T> void setSQL(T input, PreparedStatement statement, int index) {
         try {
             while (resultSet.next()){
                 transactions.add(new Transaction(
-                        resultSet.getString("TransactionID"),
-                        resultSet.getString("Quote"),
-                        resultSet.getString("Invoice"),
-                        resultSet.getString("CustomerID"),
-                        resultSet.getString("EmployeeID"))
+                        resultSet.getInt("TransactionID"),
+                        Status.Quote.valueOf(resultSet.getString("Quote")),
+                        Status.Invoice.valueOf(resultSet.getString("Invoice")),
+                        resultSet.getInt("CustomerID"),
+                        resultSet.getInt("EmployeeID"))
                 );
             }
         } catch (SQLException e) {
@@ -563,7 +590,7 @@ showExceptionAlert(e);        }
         for (TransactionProduct product:transactionProducts){
             productStatement = connection.prepareStatement(orderItemSQL);
             productStatement.setInt(1, transactionID);
-            productStatement.setString(2, product.getProductID());
+            productStatement.setInt(2, product.getProductID());
             productStatement.setInt(3, product.getQuantity());
             productStatement.executeUpdate();
             System.out.println("Done with "+product.getName());

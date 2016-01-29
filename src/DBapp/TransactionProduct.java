@@ -4,7 +4,7 @@ public class TransactionProduct extends Product{
     int quantity;
     double total;
 
-    public  TransactionProduct(String productID, String name, String description, String price, int quantity){
+    public  TransactionProduct(Integer productID, String name, String description, double price, int quantity){
         super(productID, name, description, price);
         this.quantity = quantity;
     }
