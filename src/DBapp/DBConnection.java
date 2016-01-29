@@ -205,16 +205,19 @@ public class DBConnection {
     }
 
 private <T> void setSQL(T input, PreparedStatement statement, int index) {
+    System.out.println(input.getClass().toString());
     try {
         if (input.getClass().equals(String.class))
             statement.setString(index,
-                    (String) input.getClass().getConstructor().newInstance(input));
+                    (String) input.getClass().getConstructor(String.class).newInstance(input.toString()));
         if (input.getClass().equals(Integer.class))
             statement.setInt(index,
-                    (Integer) input.getClass().getConstructor().newInstance(input));
+                    (Integer) input.getClass().getConstructor(String.class).newInstance(input.toString()));
         if (input.getClass().equals(Double.class))
             statement.setDouble(index,
-                    (Double) input.getClass().getConstructor().newInstance(input));
+                    (Double) input.getClass().getConstructor(String.class).newInstance(input.toString()));
+        if (input.getClass().equals(Status.Invoice.class) || input.getClass().equals(Status.Quote.class))
+            statement.setString(index, input.toString());
     } catch (SQLException e) {
         showExceptionAlert(e);
     } catch (Exception e){
@@ -247,10 +250,13 @@ private <T> void setSQL(T input, PreparedStatement statement, int index) {
             otherSQL = otherSQL.substring(4).trim();
             sql = sql + otherSQL;
         }
-
+        System.out.println("Past here");
+        System.out.println("----------");
+        System.out.println(sql);
+        System.out.println("----------");
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-
+            System.out.println("qwerty");
             int index = 1;
             if (!(customerID == null)) {setSQL(customerID, statement, index); index++;}
             if (!(first == null)) { setSQL(customerID, statement, index); index++; }
@@ -263,29 +269,33 @@ private <T> void setSQL(T input, PreparedStatement statement, int index) {
             if (!(phone == null)) { setSQL(customerID, statement, index); index++; }
             if (!(email == null)){  setSQL(customerID, statement, index); index++;  }
             if (!(fax == null)) { setSQL(customerID, statement, index);  }
-
+            System.out.println("lql");
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        System.out.println("cust ons");
         return customersObservable();
 
     }
-    @SuppressWarnings("unchecked")
     private boolean isNotEmpty(Object... fields){
         // Null equals empty
+        System.out.println("here");
         for (Object field : fields){
+            System.out.println("here2");
             if (!(field == null))
                 return true;
         }
+        System.out.println("here3");
         return false;
     }
 
     private ObservableList<Customer> customersObservable(){
         ObservableList<Customer> customers = FXCollections.observableArrayList();
+        System.out.println("Created obs ar list");
         try {
             while (resultSet.next()){
+                System.out.println("Inside loop");
                 customers.add(new Customer(
                         resultSet.getString("CustomerID"),
                         resultSet.getString("First"),
@@ -299,10 +309,24 @@ private <T> void setSQL(T input, PreparedStatement statement, int index) {
                         resultSet.getString("Email"),
                         resultSet.getString("Fax"))
                 );
+                System.out.println(resultSet.getString("CustomerID"));
+                System.out.println(resultSet.getString("First"));
+                System.out.println(resultSet.getString("Last"));
+                System.out.println(resultSet.getString("BusinessName"));
+                System.out.println(resultSet.getString("Address"));
+                System.out.println(resultSet.getString("City"));
+                System.out.println(resultSet.getString("State"));
+                System.out.println(resultSet.getString("Zip"));
+                System.out.println(resultSet.getString("Phone"));
+                System.out.println(resultSet.getString("Email"));
+                System.out.println(resultSet.getString("Fax"));
+
             }
+            System.out.println("done w/ loop");
         } catch (SQLException e) {
             showExceptionAlert(e);
         }
+        System.out.println("done 102");
         return customers;
 
     }
@@ -391,7 +415,7 @@ private <T> void setSQL(T input, PreparedStatement statement, int index) {
         try {
             while (resultSet.next()){
                 transactions.add(new Transaction(
-                        resultSet.getString("Transaction ID"),
+                        resultSet.getString("TransactionID"),
                         resultSet.getString("Quote"),
                         resultSet.getString("Invoice"),
                         resultSet.getString("CustomerID"),
@@ -404,33 +428,42 @@ private <T> void setSQL(T input, PreparedStatement statement, int index) {
         return transactions;
     }
 
-    public ObservableList<Transaction> searchTransactions(Integer transactionID, String quote, String invoice, Integer customerID, Integer employeeID){
+    public ObservableList<Transaction> searchTransactions(Integer transactionID, Status.Quote quote,
+                                                          Status.Invoice invoice, Integer customerID,
+                                                          Integer employeeID){
+        System.out.println("inside");
         String sql = "SELECT * FROM transaction";
         if (isNotEmpty(transactionID, quote, invoice, customerID, employeeID)){
             sql = sql + " WHERE ";
             String otherSQL = "";
-            if (!transactionID.equals("")) {otherSQL = otherSQL + "AND `Transaction ID` = ? ";}
-            if (!quote.equals("")) {otherSQL = otherSQL + "AND Quote = ? ";}
-            if (!invoice.equals("")) {otherSQL = otherSQL + "AND Invoice = ? ";}
-            if (!customerID.equals("")) { otherSQL = otherSQL + "AND CustomerID = ? "; }
+            if (!(transactionID == null)) {otherSQL = otherSQL + "AND `TransactionID` = ? ";}
+            if (!(quote == null)) {otherSQL = otherSQL + "AND Quote = ? ";}
+            if (!(invoice == null)) {otherSQL = otherSQL + "AND Invoice = ? ";}
+            if (!(customerID == null)) { otherSQL = otherSQL + "AND CustomerID = ? "; }
 
             otherSQL = otherSQL.substring(4).trim();
             sql = sql + otherSQL;
 
         }
+        System.out.println("Done w/ ift if");
 
+        System.out.println("---------");
+        System.out.println(sql);
+        System.out.println("---------");
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             int index = 1;
-            if (!transactionID.equals("")) {setSQL(transactionID, statement, index); index++;}
-            if (!quote.equals("")) {setSQL(transactionID, statement, index); index++;}
-            if (!invoice.equals("")) {setSQL(transactionID, statement, index); index++;}
-            if (!customerID.equals("")) { setSQL(transactionID, statement, index); }
+            if (!(transactionID == null)) {setSQL(transactionID, statement, index); index++;}
+            if (!(quote == null)) {setSQL(quote, statement, index); index++;}
+            if (!(invoice == null)) {setSQL(invoice, statement, index); index++;}
+            if (!(customerID == null)) { setSQL(customerID, statement, index); }
             resultSet = statement.executeQuery();
+            System.out.println("succeeded getting results");
         } catch (SQLException e) {
             showExceptionAlert(e);
         }
+//        System.out.println;
         return transactionObservable();
     }
 

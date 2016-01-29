@@ -11,10 +11,12 @@ public class searchCustomerController {
     @FXML TextField customerIDField, firstField, lastField, businessNameField, addressField, cityField, stateField,
             zipField, phoneField, emailField, faxField;
     @FXML TableView<Customer> table;
-    @FXML TableColumn<Customer, String> customerIDColumn, firstColumn, lastColumn, businessNameColumn, addressColumn,
+    @FXML TableColumn<Customer, String> firstColumn, lastColumn, businessNameColumn, addressColumn,
             cityColumn, stateColumn, zipColumn, phoneColumn, emailColumn, faxColumn;
+    @FXML TableColumn<Customer, Integer> customerIDColumn;
 
     public void searchCustomer(){
+        System.out.println("123");
         customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("CustomerID"));
         firstColumn.setCellValueFactory(new PropertyValueFactory<>("first"));
         lastColumn.setCellValueFactory(new PropertyValueFactory<>("last"));
@@ -26,6 +28,7 @@ public class searchCustomerController {
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         faxColumn.setCellValueFactory(new PropertyValueFactory<>("fax"));
+        System.out.println("lel");
         table.setItems(
                 ModelData.dbConnection.searchCustomer(
                         AppUtils.nullify(customerIDField.getText(), Integer.class),

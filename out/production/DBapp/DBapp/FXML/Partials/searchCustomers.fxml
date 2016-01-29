@@ -80,10 +80,19 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" />
                </VBox.margin>
             </GridPane>
-            <TableView>
+            <TableView fx:id="table">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="customerIDColumn" prefWidth="75.0" text="Customer ID" />
+                <TableColumn fx:id="firstColumn" prefWidth="109.00003051757812" text="First Name" />
+                  <TableColumn fx:id="lastColumn" prefWidth="83.0" text="Last Name" />
+                  <TableColumn fx:id="businessNameColumn" prefWidth="95.0" text="Business Name" />
+                  <TableColumn fx:id="addressColumn" prefWidth="77.0" text="Address" />
+                  <TableColumn fx:id="cityColumn" prefWidth="45.0" text="City" />
+                  <TableColumn fx:id="stateColumn" prefWidth="56.0" text="State" />
+                  <TableColumn fx:id="zipColumn" prefWidth="62.0" text="Zip" />
+                  <TableColumn fx:id="phoneColumn" prefWidth="81.0" text="Phone" />
+                  <TableColumn fx:id="emailColumn" prefWidth="98.0" text="Email" />
+                  <TableColumn fx:id="faxColumn" prefWidth="67.0" text="Fax" />
               </columns>
             </TableView>
             <TextFlow>
