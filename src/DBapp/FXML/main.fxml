@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DBapp.Controllers.Controller">
+<BorderPane fx:id="borderPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DBapp.Controllers.Controller">
    <top>
-      <MenuBar minWidth="800.0" BorderPane.alignment="TOP_CENTER">
+      <MenuBar minWidth="800.0" style="-fx-background-color: #EEEEEE" BorderPane.alignment="TOP_CENTER">
          <menus>
             <Menu mnemonicParsing="false" text="Add">
                <items>
@@ -34,38 +42,34 @@
       </MenuBar>
    </top>
    <left>
-      <GridPane prefHeight="335.0" prefWidth="105.0" BorderPane.alignment="CENTER">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-         </rowConstraints>
+      <HBox BorderPane.alignment="TOP_LEFT">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Shortcuts" />
-            <Button fx:id="NewTransaction" mnemonicParsing="false" onMouseClicked="#newTransaction" text="New Transaction" GridPane.rowIndex="1" />
-            <Button fx:id="Mark" mnemonicParsing="false" onAction="#mark" text="Mark" GridPane.rowIndex="2" />
-            <Button fx:id="SandP" layoutX="10.0" layoutY="73.0" mnemonicParsing="false" onAction="#searchAndPrint" text="Search &amp; Print" GridPane.rowIndex="3" />
-            <Button fx:id="AllTransactions" layoutX="10.0" layoutY="103.0" mnemonicParsing="false" onAction="#allTransactions" text="All Transactions" GridPane.rowIndex="4" />
+            <VBox id="main" spacing="5.0">
+               <children>
+                  <Label text="Shortcuts" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font></Label>
+                  <Button fx:id="NewTransaction" mnemonicParsing="false" onMouseClicked="#newTransaction" text="New Transaction" />
+                  <Button fx:id="Mark" mnemonicParsing="false" onAction="#mark" text="Mark" />
+                  <Button fx:id="SandP" mnemonicParsing="false" onAction="#searchAndPrint" text="Search &amp; Print" />
+                  <Button fx:id="AllTransactions" mnemonicParsing="false" onAction="#allTransactions" text="All Transactions" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+            <Separator maxWidth="1.0" minWidth="1.0" orientation="VERTICAL" prefHeight="331.0" prefWidth="1.0" />
          </children>
-      </GridPane>
+      </HBox>
    </left>
    <bottom>
-      <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ButtonBar prefHeight="40.0" prefWidth="375.0" style="-fx-background-color: #757575" BorderPane.alignment="CENTER">
          <buttons>
-            <TextFlow prefHeight="40.0" prefWidth="726.0">
-               <children>
-                  <Text fx:id="Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Victor Luna de la torre" wrappingWidth="177.34765625">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Text>
-               </children>
-            </TextFlow>
+            <Label prefHeight="16.0" prefWidth="742.0" text="Victor Luna" textFill="WHITE" />
             <Button fx:id="signOut" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Sign out" />
          </buttons>
       </ButtonBar>

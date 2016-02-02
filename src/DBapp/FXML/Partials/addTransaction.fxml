@@ -1,99 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DBapp.Controllers.addTransactionController">
-   <content>
-      <BorderPane>
-         <bottom>
-            <VBox BorderPane.alignment="CENTER">
+<?import javafx.scene.text.Font?>
+<BorderPane id="main" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DBapp.Controllers.addTransactionController">
+   <bottom>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <TextFlow>
+               <children>
+                  <Text fx:id="message" strokeType="OUTSIDE" strokeWidth="0.0" />
+               </children>
+            </TextFlow>
+            <HBox alignment="CENTER" spacing="10.0">
                <children>
                   <TextFlow>
                      <children>
-                        <Text fx:id="message" strokeType="OUTSIDE" strokeWidth="0.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Product ID:" />
                      </children>
                   </TextFlow>
-                  <HBox alignment="CENTER" spacing="10.0">
+                  <TextField fx:id="productIDSearchField" promptText="Product ID" />
+                  <TextFlow>
                      <children>
-                        <TextFlow>
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Product ID:" />
-                           </children>
-                        </TextFlow>
-                        <TextField fx:id="productIDSearchField" promptText="Product ID" />
-                        <TextFlow>
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Name:" />
-                           </children>
-                        </TextFlow>
-                        <ComboBox fx:id="nameSearchField" prefWidth="150.0" promptText="Product Name" />
-                        <TextFlow textAlignment="RIGHT">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Quantity:" />
-                           </children>
-                        </TextFlow>
-                        <ChoiceBox fx:id="productQuantityBox" prefHeight="25.0" prefWidth="61.0" />
-                        <Button fx:id="addItemRowButton" mnemonicParsing="false" onMouseClicked="#addItemRowClicked" text="Add Item Row" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Name:" />
                      </children>
-                     <padding>
-                        <Insets bottom="10.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets top="5.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <ButtonBar buttonMinWidth="125.0">
-                     <buttons>
-                        <Button fx:id="deleteRowButton" mnemonicParsing="false" onMouseClicked="#deleteSelectedRowClicked" text="Delete Selected Row" />
-                        <Button fx:id="submitTransactionButton" mnemonicParsing="false" onMouseClicked="#submitTransactionClicked" text="Submit Transaction" />
-                     </buttons>
-                  </ButtonBar>
+                  </TextFlow>
+                  <ComboBox fx:id="nameSearchField" prefWidth="150.0" promptText="Product Name" />
+                  <TextFlow textAlignment="RIGHT">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Quantity:" />
+                     </children>
+                  </TextFlow>
+                  <ChoiceBox fx:id="productQuantityBox" prefHeight="25.0" prefWidth="61.0" />
+                  <Button fx:id="addItemRowButton" mnemonicParsing="false" onMouseClicked="#addItemRowClicked" text="Add Item Row" />
                </children>
-            </VBox>
-         </bottom>
-         <center>
-            <TableView fx:id="table" minHeight="200.0" BorderPane.alignment="CENTER">
-              <columns>
-                <TableColumn fx:id="productIDTableColumn" prefWidth="75.0" text="Product ID" />
-                <TableColumn fx:id="nameTableColumn" prefWidth="167.0" text="Name" />
-                  <TableColumn fx:id="descriptionTableColumn" prefWidth="223.0" text="Description" />
-                  <TableColumn fx:id="priceTableColumn" prefWidth="122.0" text="Price" />
-                  <TableColumn fx:id="quantityTableColumn" onEditCommit="#commit" prefWidth="115.0" text="Quantity" />
-              </columns>
-            </TableView>
-         </center>
-         <top>
-            <VBox BorderPane.alignment="CENTER">
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <ButtonBar buttonMinWidth="125.0">
+               <buttons>
+                  <Button fx:id="deleteRowButton" mnemonicParsing="false" onMouseClicked="#deleteSelectedRowClicked" text="Delete Selected Row" />
+                  <Button fx:id="submitTransactionButton" mnemonicParsing="false" onMouseClicked="#submitTransactionClicked" text="Submit Transaction" />
+               </buttons>
+            </ButtonBar>
+         </children>
+      </VBox>
+   </bottom>
+   <center>
+      <TableView fx:id="table" minHeight="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="productIDTableColumn" prefWidth="75.0" text="Product ID" />
+          <TableColumn fx:id="nameTableColumn" prefWidth="167.0" text="Name" />
+            <TableColumn fx:id="descriptionTableColumn" prefWidth="223.0" text="Description" />
+            <TableColumn fx:id="priceTableColumn" prefWidth="122.0" text="Price" />
+            <TableColumn fx:id="quantityTableColumn" onEditCommit="#commit" prefWidth="115.0" text="Quantity" />
+        </columns>
+      </TableView>
+   </center>
+   <top>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <HBox id="label" BorderPane.alignment="CENTER">
                <children>
-                  <Pane prefHeight="59.0" prefWidth="595.0">
+                  <TextFlow>
                      <children>
-                        <TextFlow layoutX="65.0" layoutY="14.05078125">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Customer ID: " />
-                           </children>
-                        </TextFlow>
-                        <Text layoutX="65.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NOTE: If customer is new please add customer before making a new transaction." />
-                        <TextField fx:id="customerID" layoutX="141.0" layoutY="10.0" promptText="Customer ID" />
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Product">
+                           <font>
+                              <Font name="Arial Bold" size="24.0" />
+                           </font>
+                        </Text>
                      </children>
-                  </Pane>
-                  <HBox alignment="CENTER_RIGHT" spacing="10.0">
-                     <children>
-                        <Text layoutX="515.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quote Status: " />
-                        <ChoiceBox fx:id="quoteBox" prefWidth="150.0" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Invoice Status: " />
-                        <ChoiceBox fx:id="invoiceBox" layoutX="486.0" layoutY="10.0" prefWidth="150.0" />
-                     </children>
-                     <padding>
-                        <Insets bottom="5.0" />
-                     </padding>
-                  </HBox>
+                  </TextFlow>
                </children>
-            </VBox>
-         </top>
-      </BorderPane>
-   </content>
-</ScrollPane>
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" />
+               </BorderPane.margin>
+            </HBox>
+            <Pane prefHeight="59.0" prefWidth="595.0">
+               <children>
+                  <VBox layoutX="65.0" layoutY="15.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <Label text="Customer ID: " />
+                              <TextField fx:id="customerID" promptText="Customer ID" />
+                           </children>
+                        </HBox>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="NOTE: If customer is new please add customer before making a new transaction." />
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+            <HBox alignment="CENTER_RIGHT" spacing="10.0">
+               <children>
+                  <Text layoutX="515.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quote Status: " />
+                  <ChoiceBox fx:id="quoteBox" prefWidth="150.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Invoice Status: " />
+                  <ChoiceBox fx:id="invoiceBox" layoutX="486.0" layoutY="10.0" prefWidth="150.0" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+</BorderPane>

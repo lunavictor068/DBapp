@@ -26,7 +26,6 @@ public class markTransactionController implements Initializable{
     @FXML ChoiceBox<Status.Quote> quoteBox;
     @FXML ChoiceBox<Status.Invoice> invoiceBox;
     @FXML Text message;
-    @FXML Hyperlink link;
     public void markTransactionClick() {
         String transactionID = transactionIDField.getText();
         if (transactionID.equals("")) {
@@ -58,10 +57,5 @@ public class markTransactionController implements Initializable{
         invoiceBox.getItems().addAll(Status.Invoice.values());
         quoteBox.getSelectionModel().select(Status.Quote.PENDING);
         invoiceBox.getSelectionModel().select(Status.Invoice.PENDING);
-        link.setText("click");
-        link.setOnAction((ActionEvent e)->{
-            
-        });
-
     }
 }
