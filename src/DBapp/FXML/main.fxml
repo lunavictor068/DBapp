@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<BorderPane fx:id="borderPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DBapp.Controllers.Controller">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="borderPane" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8.0.65" fx:controller="DBapp.Controllers.Controller">
    <top>
       <MenuBar minWidth="800.0" style="-fx-background-color: #EEEEEE" BorderPane.alignment="TOP_CENTER">
          <menus>
@@ -67,11 +59,49 @@
       </HBox>
    </left>
    <bottom>
-      <ButtonBar prefHeight="40.0" prefWidth="375.0" style="-fx-background-color: #757575" BorderPane.alignment="CENTER">
+      <ButtonBar buttonMinWidth="100.0" prefHeight="40.0" prefWidth="375.0" style="-fx-background-color: #757575"
+                 BorderPane.alignment="CENTER">
          <buttons>
             <Label prefHeight="16.0" prefWidth="742.0" text="Victor Luna" textFill="WHITE" />
-            <Button fx:id="signOut" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Sign out" />
+            <Button fx:id="signOut" onMouseClicked="#signout" maxHeight="25.0" maxWidth="25.0" minHeight="25.0"
+                    minWidth="50.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Sign out"/>
          </buttons>
       </ButtonBar>
    </bottom>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <top>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextFlow textAlignment="CENTER">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                              text="Use the manu bar above to navigate.&#10;There are shotrcuts on the left for your convenience."
+                              textAlignment="CENTER"/>
+                     </children>
+                  </TextFlow>
+               </children>
+            </HBox>
+         </top>
+         <center>
+            <VBox>
+               <children>
+                  <TextFlow textAlignment="CENTER">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Make sure to" textAlignment="CENTER"/>
+                        <Hyperlink onMouseClicked="#addCustomer" text="add a customer"/>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="before submitting a transaction."/>
+                     </children>
+                  </TextFlow>
+                  <TextFlow layoutX="10.0" layoutY="10.0" textAlignment="CENTER">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                              text="If the customer does not wish to register make sure they pay before they leave, don`t enter a customer ID, and mark the Quote as ACCEPTED and Invoice as PAID."/>
+                     </children>
+                  </TextFlow>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </center>
 </BorderPane>

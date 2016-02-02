@@ -4,8 +4,6 @@ import DBapp.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.fxml.JavaFXBuilderFactory;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
@@ -81,5 +79,11 @@ public class Controller implements Initializable{
         //TODO implement method
         System.out.println("TODO implement method");
     }
+
+    public void signout() {
+        System.out.println("Sign pout");
+        // TODO impliment sign out loginc
+    }
+
 
 }
