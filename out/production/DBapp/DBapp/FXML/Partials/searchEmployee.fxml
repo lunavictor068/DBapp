@@ -19,7 +19,7 @@
    <content>
       <VBox>
          <children>
-             <HBox style="-fx-background-color: #757575;">
+             <HBox styleClass="test" >
                  <children>
                      <TextFlow>
                          <children>

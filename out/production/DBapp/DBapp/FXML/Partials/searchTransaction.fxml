@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.geometry.Insets?>
 
-<VBox xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DBapp.Controllers.searchTransactionController">
+<VBox xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DBapp.Controllers.searchTransactionController">
    <children>
        <HBox style="-fx-background-color: #757575;">
            <children>
@@ -48,8 +44,8 @@
       <GridPane>
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -70,28 +66,40 @@
             <Button mnemonicParsing="false" onMouseClicked="#searchTransactionClick" text="Submit" GridPane.columnIndex="5" GridPane.rowIndex="1" />
             <Text layoutX="310.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" GridPane.columnIndex="4" />
             <TextField fx:id="employeeIDField" layoutX="310.0" layoutY="43.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <ChoiceBox fx:id="quoteBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ChoiceBox fx:id="invoiceBox" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="quoteBox" maxWidth="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="invoiceBox" maxWidth="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <TableView fx:id="tableView">
-        <columns>
-          <TableColumn fx:id="transactionIDTColumn" prefWidth="144.0" text="Transaction ID" />
-          <TableColumn fx:id="quoteTColumn" prefWidth="130.0" text="Quote" />
-            <TableColumn fx:id="invoiceTColumn" prefWidth="89.0" text="Invoice" />
-            <TableColumn fx:id="customerIDTColumn" prefWidth="102.0" text="Customer ID" />
-            <TableColumn fx:id="employeeIDTColumn" prefWidth="134.0" text="Employee ID" />
-        </columns>
-      </TableView>
-      <TableView fx:id="tableView1" layoutX="10.0" layoutY="127.0">
-         <columns>
-            <TableColumn fx:id="transactionIDTColumn1" prefWidth="144.0" text="Product ID" />
-            <TableColumn fx:id="quoteTColumn1" prefWidth="130.0" text="Name" />
-            <TableColumn fx:id="invoiceTColumn1" prefWidth="89.0" text="Description" />
-            <TableColumn fx:id="customerIDTColumn1" prefWidth="102.0" text="Price" />
-            <TableColumn fx:id="employeeIDTColumn1" prefWidth="134.0" text="Quantity" />
-         </columns>
-      </TableView>
+      <SplitPane dividerPositions="0.5" orientation="VERTICAL">
+        <items>
+            <TitledPane animated="false" collapsible="false" text="Transactions">
+               <content>
+                  <TableView fx:id="transactionTable">
+                    <columns>
+                      <TableColumn fx:id="transactionIDTColumn" prefWidth="144.0" text="Transaction ID" />
+                      <TableColumn fx:id="quoteTColumn" prefWidth="130.0" text="Quote" />
+                        <TableColumn fx:id="invoiceTColumn" prefWidth="89.0" text="Invoice" />
+                        <TableColumn fx:id="customerIDTColumn" prefWidth="102.0" text="Customer ID" />
+                        <TableColumn fx:id="employeeIDTColumn" prefWidth="134.0" text="Employee ID" />
+                    </columns>
+                  </TableView>
+               </content>
+            </TitledPane>
+            <TitledPane animated="false" collapsible="false" text="Order Items">
+               <content>
+                  <TableView fx:id="productTable">
+                     <columns>
+                        <TableColumn fx:id="productIDTColumn" prefWidth="144.0" text="Product ID" />
+                        <TableColumn fx:id="nameTColumn" prefWidth="130.0" text="Name" />
+                        <TableColumn fx:id="descriptionTColumn" prefWidth="89.0" text="Description" />
+                        <TableColumn fx:id="priceIDTColumn" prefWidth="102.0" text="Price" />
+                        <TableColumn fx:id="quantityIDTColumn" prefWidth="134.0" text="Quantity" />
+                     </columns>
+                  </TableView>
+               </content>
+            </TitledPane>
+        </items>
+      </SplitPane>
        <TextFlow>
            <children>
                <Text fx:id="message" strokeType="OUTSIDE" strokeWidth="0.0" />
