@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.text.TextFlow?>
-
-<BorderPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DBapp.Controllers.searchCustomerController">
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65"
+            fx:controller="DBapp.Controllers.searchCustomerController">
    <bottom>
       <TextFlow BorderPane.alignment="CENTER">
          <children>
@@ -51,167 +40,168 @@
             </HBox>
             <GridPane>
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="500.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="100.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="500.0"/>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="100.0" prefWidth="100.0"/>
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
                </rowConstraints>
                <children>
                   <FlowPane hgap="10.0">
                      <children>
                         <GridPane>
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                           </rowConstraints>
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer ID" />
-                              <TextField fx:id="customerIDField" GridPane.rowIndex="1" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer ID"/>
+                              <TextField fx:id="customerIDField" GridPane.rowIndex="1"/>
                            </children>
                         </GridPane>
                         <GridPane layoutX="10.0" layoutY="10.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First" />
-                              <TextField fx:id="firstField" GridPane.rowIndex="1" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First"/>
+                              <TextField fx:id="firstField" GridPane.rowIndex="1"/>
                            </children>
                         </GridPane>
                         <GridPane layoutX="110.0" layoutY="10.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last" />
-                              <TextField fx:id="lastField" GridPane.rowIndex="1" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last"/>
+                              <TextField fx:id="lastField" GridPane.rowIndex="1"/>
                            </children>
                         </GridPane>
                         <GridPane layoutX="210.0" layoutY="10.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bussiness Name" />
-                              <TextField fx:id="businessNameField" GridPane.rowIndex="1" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bussiness Name"/>
+                              <TextField fx:id="businessNameField" GridPane.rowIndex="1"/>
                            </children>
                         </GridPane>
                         <GridPane layoutX="310.0" layoutY="10.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address" />
-                              <TextField fx:id="addressField" GridPane.rowIndex="1" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address"/>
+                              <TextField fx:id="addressField" GridPane.rowIndex="1"/>
                            </children>
                         </GridPane>
                         <GridPane layoutX="410.0" layoutY="10.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City" />
-                              <TextField fx:id="cityField" GridPane.rowIndex="1" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City"/>
+                              <TextField fx:id="cityField" GridPane.rowIndex="1"/>
                            </children>
                         </GridPane>
                         <GridPane layoutX="510.0" layoutY="10.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="State" />
-                              <TextField fx:id="stateField" GridPane.rowIndex="1" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="State"/>
+                              <TextField fx:id="stateField" GridPane.rowIndex="1"/>
                            </children>
                         </GridPane>
                         <GridPane layoutX="610.0" layoutY="10.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zip" />
-                              <TextField fx:id="zipField" GridPane.rowIndex="1" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zip"/>
+                              <TextField fx:id="zipField" GridPane.rowIndex="1"/>
                            </children>
                         </GridPane>
                         <GridPane layoutX="10.0" layoutY="70.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phone" />
-                              <TextField fx:id="phoneField" GridPane.rowIndex="1" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phone"/>
+                              <TextField fx:id="phoneField" GridPane.rowIndex="1"/>
                            </children>
                         </GridPane>
                         <GridPane layoutX="110.0" layoutY="70.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
-                              <TextField fx:id="emailField" GridPane.rowIndex="1" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email"/>
+                              <TextField fx:id="emailField" GridPane.rowIndex="1"/>
                            </children>
                         </GridPane>
                         <GridPane layoutX="210.0" layoutY="70.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fax" />
-                              <TextField fx:id="faxField" GridPane.rowIndex="1" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fax"/>
+                              <TextField fx:id="faxField" GridPane.rowIndex="1"/>
                            </children>
                         </GridPane>
                      </children>
                      <GridPane.margin>
-                        <Insets left="10.0" right="10.0" />
+                        <Insets left="10.0" right="10.0"/>
                      </GridPane.margin>
                   </FlowPane>
-                  <Button mnemonicParsing="false" onMouseClicked="#searchCustomer" text="Submit" GridPane.columnIndex="1" />
+                  <Button mnemonicParsing="false" onMouseClicked="#searchCustomer" text="Submit"
+                          GridPane.columnIndex="1"/>
                </children>
                <VBox.margin>
-                  <Insets bottom="10.0" />
+                  <Insets bottom="10.0"/>
                </VBox.margin>
             </GridPane>
          </children>

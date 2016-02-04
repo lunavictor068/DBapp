@@ -53,7 +53,8 @@
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Invoice Status" GridPane.columnIndex="2" />
                   <TextField fx:id="transactionIDField" GridPane.rowIndex="1" />
                   <TextField fx:id="customerIDField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" onMouseClicked="#searchTransactionClick" text="Submit" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                   <Button mnemonicParsing="false" id="searchTransactionButton" onMouseClicked="#searchTransactionClick"
+                           text="Submit" GridPane.columnIndex="5" GridPane.rowIndex="1"/>
                   <Text layoutX="310.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" GridPane.columnIndex="4" />
                   <TextField fx:id="employeeIDField" layoutX="310.0" layoutY="43.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                    <ChoiceBox fx:id="quoteBox" maxWidth="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />

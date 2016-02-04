@@ -105,22 +105,9 @@ public class DBConnection {
 
     }
 
-    class DatabaseInfo{
-        public DatabaseInfo(String databaseAddress, String databaseName, String username, String password) {
-            this.databaseAddress = databaseAddress;
-            this.databaseName = databaseName;
-            this.username = username;
-            this.password = password;
-        }
-        String databaseAddress;
-        String databaseName;
-        String username;
-        String password;
-    }
-
     public void addEmployee(String firstName, String lastName,
                             String address, String city, String state,
-                            String zip, String phone, String email){
+                            String zip, String phone, String email) {
         //language=SQL
         String sql = "INSERT INTO " +
                 "employee(First, Last, Address, City, State, Zip, Phone, Email)" +
@@ -305,6 +292,7 @@ public ObservableList<TransactionProduct> searchOrderItems(Transaction transacti
         return customersObservable();
 
     }
+
     private boolean isNotEmpty(Object... fields){
         // Null equals empty
         System.out.println("here");
@@ -321,7 +309,7 @@ public ObservableList<TransactionProduct> searchOrderItems(Transaction transacti
         ObservableList<Customer> customers = FXCollections.observableArrayList();
         System.out.println("Created obs ar list");
         try {
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 System.out.println("Inside loop");
                 customers.add(new Customer(
                         resultSet.getString("CustomerID"),
@@ -358,11 +346,8 @@ public ObservableList<TransactionProduct> searchOrderItems(Transaction transacti
 
     }
 
-    // Add Transaction
-
-
     // Products stuffs
-    private ObservableList<Product> productObservable(){
+    private ObservableList<Product> productObservable() {
         ObservableList<Product> products = FXCollections.observableArrayList();
         try {
             while (resultSet.next()){
@@ -378,6 +363,9 @@ public ObservableList<TransactionProduct> searchOrderItems(Transaction transacti
         }
         return products;
     }
+
+    // Add Transaction
+
      // Transaction ProductProducts stuffs
     @SuppressWarnings("SpellCheckingInspection")
     private ObservableList<TransactionProduct> transactionproductObservable(){
@@ -436,6 +424,7 @@ public ObservableList<TransactionProduct> searchOrderItems(Transaction transacti
         }
         return transactionproductObservable();
     }
+
     // Transaction stuffs
     private ObservableList<Transaction> transactionObservable(){
         ObservableList<Transaction> transactions = FXCollections.observableArrayList();
@@ -542,7 +531,7 @@ showExceptionAlert(e);
         try {
             while (resultSet.next()){
                 employees.add(new Employee(
-                                resultSet.getString("EmployeeID"),
+                        resultSet.getInt("EmployeeID"),
                                 resultSet.getString("First"),
                                 resultSet.getString("Last"),
                                 resultSet.getString("Address"),
@@ -557,7 +546,8 @@ showExceptionAlert(e);
 showExceptionAlert(e);        }
         return employees;
     }
-// End Employee stuffs
+
+    // End Employee stuffs
 // New transaction
     public void newTransaction(Status.Quote quote, Status.Invoice invoice, int customerID, int employeeID, ObservableList<TransactionProduct> transactionProducts) throws Exception{
         connection.setAutoCommit(false);
@@ -594,6 +584,46 @@ showExceptionAlert(e);        }
             productStatement.setInt(3, product.getQuantity());
             productStatement.executeUpdate();
             System.out.println("Done with "+product.getName());
+        }
+    }
+
+    public Employee employeeIDExists(Integer employeeID) {
+        try {
+            //language=SQL
+            String sql = "SELECT * FROM employee WHERE EmployeeID = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, employeeID);
+            ResultSet matches = preparedStatement.executeQuery();
+            if (matches.next()) return new Employee(
+                    matches.getInt("EmployeeID"),
+                    matches.getString("First"),
+                    matches.getString("Last"),
+                    matches.getString("Address"),
+                    matches.getString("City"),
+                    matches.getString("State"),
+                    matches.getString("Zip"),
+                    matches.getString("Phone"),
+                    matches.getString("Email"));
+            else {
+                return null;
+            }
+        } catch (SQLException e) {
+            AppUtils.displayAlert("An error occured!", "Error code " + e.getErrorCode(), e.getMessage());
+        }
+        return null;
+    }
+
+    class DatabaseInfo {
+        String databaseAddress;
+        String databaseName;
+        String username;
+        String password;
+
+        public DatabaseInfo(String databaseAddress, String databaseName, String username, String password) {
+            this.databaseAddress = databaseAddress;
+            this.databaseName = databaseName;
+            this.username = username;
+            this.password = password;
         }
     }
 

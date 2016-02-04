@@ -1,14 +1,20 @@
 package DBapp.Controllers;
 
 import DBapp.Main;
+import DBapp.ModelData;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,12 +29,13 @@ public class Controller implements Initializable{
 
     @FXML ScrollPane scrollPane;
 
-    @FXML Text Name;
+    @FXML
+    Label nameLabel;
 
     @FXML BorderPane borderPane;
 
     @Override public void initialize(URL location, ResourceBundle resources) {
-
+        nameLabel.setText(ModelData.currentEmloyee.getFirst() + " " + ModelData.currentEmloyee.getLast());
     }
 
     private void loadCenterPartial(String fxmlName){
@@ -76,13 +83,30 @@ public class Controller implements Initializable{
     }
 
     public void allTransactions(){
-        //TODO implement method
-        System.out.println("TODO implement method");
+        try {
+            Node node = FXMLLoader.load(Main.class.getResource("FXML/Partials/searchTransaction.fxml"));
+            borderPane.setCenter(node);
+            // Simulate mouse click on Submit button. Will search for all transactions.
+            Event.fireEvent(node.lookup("#searchTransactionButton"),
+                    new MouseEvent(
+                            MouseEvent.MOUSE_CLICKED, 0, 0, 0, 0,
+                            MouseButton.PRIMARY, 1, true, true, true, true, true, true, true, true, true, true, null));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void signout() {
-        System.out.println("Sign pout");
-        // TODO impliment sign out loginc
+        try {
+            Scene root = new Scene(FXMLLoader.load(Main.class.getResource("FXML/start.fxml")));
+            root.getStylesheets().add(Main.class.getResource("test.css").toExternalForm());
+            ModelData.stage.setScene(root);
+            ModelData.stage.hide();
+            ModelData.stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ModelData.currentEmloyee = null;
     }
 
 

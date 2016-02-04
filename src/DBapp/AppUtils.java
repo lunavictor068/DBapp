@@ -1,12 +1,17 @@
 package DBapp;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
 
 import javax.print.*;
 import javax.print.attribute.HashPrintRequestAttributeSet;
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 
 public class AppUtils {
@@ -33,6 +38,11 @@ public class AppUtils {
 
     public static void displayAlert(String title, String header, String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
+        /* Used to fix Linux bug where the window is not large enough to display the text,
+         resulting in text being replaced with ... (three dots). */
+        alert.getDialogPane().getChildren().stream().filter(node -> node instanceof Label).forEach(
+                node -> ((Label) node).setMinHeight(Region.USE_PREF_SIZE)
+        );
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(message);
@@ -80,5 +90,24 @@ public class AppUtils {
             e.printStackTrace();
         }
 
+    }
+
+    public static void print(TableView<Transaction> transactionTableView,
+                             TableView<TransactionProduct> transactionProductTableView) {
+        try {
+            DocFlavor flavor = DocFlavor.INPUT_STREAM.AUTOSENSE;
+            PrintService[] services = PrintServiceLookup.lookupPrintServices(
+                    flavor, null);
+            PrintService defaultService = PrintServiceLookup.lookupDefaultPrintService();
+            PrintService service = ServiceUI.printDialog(null, 200, 200, services, defaultService,
+                    flavor, new HashPrintRequestAttributeSet());
+            // TODO Build string "Receipt".
+            InputStream receipt = new ByteArrayInputStream("hello world!\f".getBytes("UTF8"));
+            Doc doc = new SimpleDoc(receipt, flavor, null);
+            DocPrintJob job = service.createPrintJob();
+            job.print(doc, null);
+        } catch (Exception e) {
+            AppUtils.displayAlert("Error", "Something went wrong", e.getMessage());
+        }
     }
 }

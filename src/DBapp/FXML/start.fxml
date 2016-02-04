@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65" id="main"
-            fx:controller="DBapp.Main">
+            fx:controller="DBapp.Controllers.startController">
    <center>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
             prefWidth="600.0">
@@ -19,7 +19,7 @@
                   <Font size="36.0"/>
                </font>
             </Text>
-            <TextField layoutX="224.0" layoutY="238.0" promptText="Employee ID..."/>
+            <TextField layoutX="224.0" layoutY="238.0" fx:id="employeeIDText" promptText="Employee ID..."/>
             <Button layoutX="431.0" layoutY="238.0" mnemonicParsing="false" text="Login" onMouseClicked="#startApp"/>
             <ImageView fitHeight="115.0" fitWidth="550.0" layoutX="26.0" layoutY="14.0" pickOnBounds="true"
                        preserveRatio="true"/>

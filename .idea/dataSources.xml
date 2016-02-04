@@ -13,7 +13,6 @@
         <property name="characterSetResults" value="utf8" />
         <property name="yearIsDateType" value="false" />
       </driver-properties>
-      <libraries />
     </data-source>
     <data-source source="LOCAL" name="MySQL - acsm_dafb58a7a81b817@us-cdbr-azure-central-a.cloudapp.net" uuid="c13f93d5-b41a-4fee-bdfb-793e5d28e0a8">
       <driver-ref>mysql</driver-ref>
@@ -27,7 +26,6 @@
         <property name="characterSetResults" value="utf8" />
         <property name="yearIsDateType" value="false" />
       </driver-properties>
-      <libraries />
     </data-source>
     <data-source source="LOCAL" name="MySQL - acsm_dafb58a7a81b817@us-cdbr-azure-central-a.cloudapp.net" uuid="c13f93d5-b41a-4fee-bdfb-793e5d28e0a8">
       <driver-ref>mysql</driver-ref>
@@ -41,7 +39,6 @@
         <property name="characterSetResults" value="utf8" />
         <property name="yearIsDateType" value="false" />
       </driver-properties>
-      <libraries />
     </data-source>
   </component>
 </project>

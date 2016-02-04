@@ -4,7 +4,7 @@ package DBapp;
  * Created by victorluna on 1/12/16.
  */
 public class Employee {
-    String employeeID;
+    Integer employeeID;
     String first;
     String last;
     String address;
@@ -15,7 +15,7 @@ public class Employee {
     String email;
 
 
-    public Employee(String employeeID, String first, String last, String address,
+    public Employee(Integer employeeID, String first, String last, String address,
                     String city, String state, String zip, String phone, String email) {
         this.employeeID = employeeID;
         this.first = first;
@@ -28,11 +28,11 @@ public class Employee {
         this.email = email;
     }
 
-    public String getEmployeeID() {
+    public Integer getEmployeeID() {
         return employeeID;
     }
 
-    public void setEmployeeID(String employeeID) {
+    public void setEmployeeID(Integer employeeID) {
         this.employeeID = employeeID;
     }
 

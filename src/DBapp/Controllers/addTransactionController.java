@@ -1,6 +1,9 @@
 package DBapp.Controllers;
 
-import DBapp.*;
+import DBapp.AppUtils;
+import DBapp.ModelData;
+import DBapp.Status;
+import DBapp.TransactionProduct;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,14 +12,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.text.Text;
 import javafx.util.converter.IntegerStringConverter;
-import javafx.util.converter.NumberStringConverter;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.ResourceBundle;
-import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
 
 
 public class addTransactionController implements Initializable {
@@ -56,28 +54,57 @@ public class addTransactionController implements Initializable {
 
     public void addItemRowClicked(){
         TransactionProduct selected = nameSearchField.getSelectionModel().getSelectedItem();
-        if (selected == null){
+        String productIDSearch = productIDSearchField.getText();
+        if (selected == null && productIDSearch.equals("")) {
             message.setText("No product selected!");
-        }
-        else {
-            // check if item already in .
-            int index = table.getItems().indexOf(selected);
-            if (index == -1) {
-                selected.setQuantity(productQuantityBox.getSelectionModel().getSelectedItem());
-                table.getItems().add(selected);
-                table.getSelectionModel().selectLast();
-            } else {
-                message.setText(selected + " is already in the table.\n" +
-                        "Added selected quantity to the previous quantity.");
-                TransactionProduct item = table.getItems().get(index);
-                item.setQuantity(item.getQuantity() + productQuantityBox.getSelectionModel().getSelectedItem());
-                table.getSelectionModel().select(index);
-            }
+        } else if (selected != null) {
+            // Search selected Product
+            addProductToTable(selected);
             productQuantityBox.getSelectionModel().selectFirst();
             nameSearchField.getSelectionModel().clearSelection();
             table.refresh();
+        } else {
+            // There is text in the text field
+            try {
+                Integer productID = Integer.parseInt(productIDSearch);
+                for (TransactionProduct transactionProduct : nameSearchField.getItems()) {
+                    if (transactionProduct.getProductID().equals(productID)) {
+                        // Add product to table
+                        addProductToTable(transactionProduct);
+                        AppUtils.clearTextFields(productIDSearchField);
+                        // This may be bad design. Not sure :P
+                        return;
+                    }
+                }
+                AppUtils.displayAlert("Not Found",
+                        productIDSearch + " is not the ID of a valid product.",
+                        "Please enter the ID of a valid Product of use the Product menu.");
+            } catch (NumberFormatException e) {
+                AppUtils.displayAlert("Error",
+                        productIDSearch + " is not a number.",
+                        "Please enter a number for the Product ID.");
+            }
         }
     }
+
+    public void addProductToTable(TransactionProduct product) {
+        int index = table.getItems().indexOf(product);
+        // Not already in table
+        if (index == -1) {
+            product.setQuantity(productQuantityBox.getSelectionModel().getSelectedItem());
+            table.getItems().add(product);
+            table.getSelectionModel().selectLast();
+        } else {
+            // Already in table
+            message.setText(product + " is already in the table.\n" +
+                    "Added selected quantity to the previous quantity.");
+            TransactionProduct item = table.getItems().get(index);
+            item.setQuantity(item.getQuantity() + productQuantityBox.getSelectionModel().getSelectedItem());
+            table.getSelectionModel().select(index);
+        }
+    }
+
+
     public void deleteSelectedRowClicked(){
         ObservableList<TransactionProduct> selected, all;
         all = table.getItems();

@@ -62,9 +62,10 @@
       <ButtonBar buttonMinWidth="100.0" prefHeight="40.0" prefWidth="375.0" style="-fx-background-color: #757575"
                  BorderPane.alignment="CENTER">
          <buttons>
-            <Label prefHeight="16.0" prefWidth="742.0" text="Victor Luna" textFill="WHITE" />
-            <Button fx:id="signOut" onMouseClicked="#signout" maxHeight="25.0" maxWidth="25.0" minHeight="25.0"
-                    minWidth="50.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Sign out"/>
+            <Label fx:id="nameLabel" prefHeight="16.0" prefWidth="742.0" text="Victor Luna" textFill="WHITE"/>
+            <Button fx:id="signOut" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="50.0"
+                    mnemonicParsing="false" onMouseClicked="#signout" prefHeight="25.0" prefWidth="25.0"
+                    text="Sign out"/>
          </buttons>
       </ButtonBar>
    </bottom>
