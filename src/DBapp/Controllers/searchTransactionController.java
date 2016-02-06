@@ -3,7 +3,10 @@ package DBapp.Controllers;
 import DBapp.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -54,5 +57,17 @@ public class searchTransactionController implements Initializable{
                         AppUtils.nullify(customerIDField.getText(), Integer.class),
                         AppUtils.nullify(employeeIDField.getText(), Integer.class)));
     }
+
+    public void print() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                AppUtils.print(transactionTable, productTable);
+            }
+        }).start();
+
+
+    }
+
 
 }

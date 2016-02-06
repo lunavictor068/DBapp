@@ -33,4 +33,11 @@ public class TransactionProduct extends Product{
     public void setTotal(double total) {
         this.total = total;
     }
+
+    public String prettyString() {
+        return "Product ID: " + getProductID()
+                + " - Name: " + getName()
+                + " - Price: " + getPrice()
+                + " - Quantity: " + getQuantity();
+    }
 }
