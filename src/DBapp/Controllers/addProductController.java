@@ -1,7 +1,6 @@
 package DBapp.Controllers;
 
 import DBapp.AppUtils;
-import DBapp.Main;
 import DBapp.ModelData;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

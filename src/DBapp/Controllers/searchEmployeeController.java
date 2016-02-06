@@ -1,6 +1,9 @@
 package DBapp.Controllers;
 
-import DBapp.*;
+import DBapp.AppUtils;
+import DBapp.DatabaseModels.Customer;
+import DBapp.DatabaseModels.Employee;
+import DBapp.ModelData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;

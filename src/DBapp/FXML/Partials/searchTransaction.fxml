@@ -8,20 +8,20 @@
             fx:controller="DBapp.Controllers.searchTransactionController">
    <top>
       <VBox id="main" BorderPane.alignment="CENTER">
-         <children>
-             <HBox id="label">
-                 <children>
-                     <TextFlow>
-                         <children>
-                             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Transactions">
+
+          <HBox id="label">
+
+              <TextFlow>
+
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Transactions">
                                  <font>
                                      <Font name="Arial Bold" size="24.0" />
                                  </font>
                              </Text>
-                         </children>
-                     </TextFlow>
-                 </children>
-                 <padding>
+
+              </TextFlow>
+
+              <padding>
                      <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                  </padding>
                  <opaqueInsets>
@@ -46,33 +46,36 @@
                   <RowConstraints vgrow="SOMETIMES" />
                   <RowConstraints vgrow="SOMETIMES" />
               </rowConstraints>
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quote Status" GridPane.columnIndex="1" />
+
+                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quote Status" GridPane.columnIndex="1" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Transaction ID" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cusomer ID" GridPane.columnIndex="3" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Invoice Status" GridPane.columnIndex="2" />
                   <TextField fx:id="transactionIDField" GridPane.rowIndex="1" />
                   <TextField fx:id="customerIDField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                   <Button id="searchTransactionButton" mnemonicParsing="false" onMouseClicked="#searchTransactionClick"
-                           text="Submit" GridPane.columnIndex="5" GridPane.rowIndex="1"/>
-                  <Text layoutX="310.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID" GridPane.columnIndex="4" />
-                  <TextField fx:id="employeeIDField" layoutX="310.0" layoutY="43.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                   <ChoiceBox fx:id="quoteBox" maxWidth="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                   <ChoiceBox fx:id="invoiceBox" maxWidth="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                 <Button id="searchTransactionButton" mnemonicParsing="false"
+                         onMouseClicked="#searchTransactionClick"
+                         text="Submit" GridPane.columnIndex="5" GridPane.rowIndex="1"/>
+                 <Text layoutX="310.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID"
+                       GridPane.columnIndex="4"/>
+                 <TextField fx:id="employeeIDField" layoutX="310.0" layoutY="43.0" GridPane.columnIndex="4"
+                            GridPane.rowIndex="1"/>
+                 <ChoiceBox fx:id="quoteBox" maxWidth="100.0" prefWidth="100.0" GridPane.columnIndex="1"
+                            GridPane.rowIndex="1"/>
+                 <ChoiceBox fx:id="invoiceBox" maxWidth="100.0" prefWidth="100.0" GridPane.columnIndex="2"
+                            GridPane.rowIndex="1"/>
                    <Button mnemonicParsing="false" onMouseClicked="#print" text="Print" GridPane.columnIndex="5"/>
-               </children>
+
                  <VBox.margin>
                      <Insets bottom="10.0" left="10.0" right="10.0"/>
                  </VBox.margin>
             </GridPane>
-         </children>
+
       </VBox>
    </top>
    <center>
        <SplitPane dividerPositions="0.5" orientation="VERTICAL" BorderPane.alignment="CENTER">
-           <items>
                <TitledPane animated="false" collapsible="false" text="Transactions">
-                   <content>
                        <TableView fx:id="transactionTable">
                            <columns>
                                <TableColumn fx:id="transactionIDTColumn" prefWidth="144.0" text="Transaction ID" />
@@ -82,10 +85,8 @@
                                <TableColumn fx:id="employeeIDTColumn" prefWidth="134.0" text="Employee ID" />
                            </columns>
                        </TableView>
-                   </content>
                </TitledPane>
                <TitledPane animated="false" collapsible="false" text="Order Items">
-                   <content>
                        <TableView fx:id="productTable">
                            <columns>
                                <TableColumn fx:id="productIDTColumn" prefWidth="144.0" text="Product ID" />
@@ -95,16 +96,12 @@
                                <TableColumn fx:id="quantityIDTColumn" prefWidth="134.0" text="Quantity" />
                            </columns>
                        </TableView>
-                   </content>
                </TitledPane>
-           </items>
        </SplitPane>
    </center>
    <bottom>
        <TextFlow BorderPane.alignment="CENTER">
-           <children>
-               <Text fx:id="message" strokeType="OUTSIDE" strokeWidth="0.0" />
-           </children>
+           <Text strokeType="OUTSIDE" strokeWidth="0.0"/>
        </TextFlow>
    </bottom>
 </BorderPane>

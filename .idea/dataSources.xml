@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="403795716">
+  <component name="DataSourceManagerImpl" format="xml">
     <data-source source="LOCAL" name="MySQL - alex5db@localhost" uuid="e080eac7-79e7-4d6b-9d36-017b39b3492a">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
@@ -13,7 +13,6 @@
         <property name="characterSetResults" value="utf8" />
         <property name="yearIsDateType" value="false" />
       </driver-properties>
-      <libraries />
     </data-source>
     <data-source source="LOCAL" name="MySQL - acsm_dafb58a7a81b817@us-cdbr-azure-central-a.cloudapp.net" uuid="c13f93d5-b41a-4fee-bdfb-793e5d28e0a8">
       <driver-ref>mysql</driver-ref>
@@ -27,7 +26,6 @@
         <property name="characterSetResults" value="utf8" />
         <property name="yearIsDateType" value="false" />
       </driver-properties>
-      <libraries />
     </data-source>
     <data-source source="LOCAL" name="MySQL - acsm_dafb58a7a81b817@us-cdbr-azure-central-a.cloudapp.net" uuid="c13f93d5-b41a-4fee-bdfb-793e5d28e0a8">
       <driver-ref>mysql</driver-ref>
@@ -41,7 +39,6 @@
         <property name="characterSetResults" value="utf8" />
         <property name="yearIsDateType" value="false" />
       </driver-properties>
-      <libraries />
     </data-source>
   </component>
 </project>

@@ -13,7 +13,6 @@
    <center>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
             prefWidth="600.0">
-         <children>
             <Text layoutX="112.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your Employee ID">
                <font>
                   <Font size="36.0"/>
@@ -23,7 +22,6 @@
             <Button layoutX="431.0" layoutY="238.0" mnemonicParsing="false" text="Login" onMouseClicked="#startApp"/>
             <ImageView fitHeight="115.0" fitWidth="550.0" layoutX="26.0" layoutY="14.0" pickOnBounds="true"
                        preserveRatio="true"/>
-         </children>
       </Pane>
    </center>
 </BorderPane>

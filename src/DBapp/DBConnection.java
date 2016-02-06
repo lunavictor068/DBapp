@@ -1,5 +1,6 @@
 package DBapp;
 
+import DBapp.DatabaseModels.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,9 +47,6 @@ public class DBConnection {
                 }
                 completeAddress = driver + databaseAddress +"/"+ databaseName;
                 try {
-                    System.out.println(completeAddress);
-                    System.out.println(username);
-                    System.out.println(password);
                     connection = DriverManager.getConnection(completeAddress, username, password);
                     isConnectionValid = true; // Should only execute if connection succeeds.
                 } catch (SQLException innerException) {
@@ -192,7 +190,6 @@ public class DBConnection {
     }
 
 private <T> void setSQL(T input, PreparedStatement statement, int index) {
-    System.out.println(input.getClass().toString());
     try {
         if (input.getClass().equals(String.class))
             statement.setString(index,
@@ -243,8 +240,8 @@ public ObservableList<TransactionProduct> searchOrderItems(Transaction transacti
 }
 
     public ObservableList<Customer> searchCustomer(Integer customerID, String first, String last, String businessName,
-                               String address, String city, String state, String zip,
-                               String  phone, String email, String fax){
+                                                   String address, String city, String state, String zip,
+                                                   String phone, String email, String fax) {
         String sql = "SELECT * FROM customer";
 
         if (isNotEmpty(customerID, first, last, businessName, address, city, state, zip, phone, email, fax)){
@@ -264,13 +261,8 @@ public ObservableList<TransactionProduct> searchOrderItems(Transaction transacti
             otherSQL = otherSQL.substring(4).trim();
             sql = sql + otherSQL;
         }
-        System.out.println("Past here");
-        System.out.println("----------");
-        System.out.println(sql);
-        System.out.println("----------");
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            System.out.println("qwerty");
             int index = 1;
             if (!(customerID == null)) {setSQL(customerID, statement, index); index++;}
             if (!(first == null)) { setSQL(customerID, statement, index); index++; }
@@ -283,34 +275,27 @@ public ObservableList<TransactionProduct> searchOrderItems(Transaction transacti
             if (!(phone == null)) { setSQL(customerID, statement, index); index++; }
             if (!(email == null)){  setSQL(customerID, statement, index); index++;  }
             if (!(fax == null)) { setSQL(customerID, statement, index);  }
-            System.out.println("lql");
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("cust ons");
         return customersObservable();
 
     }
 
     private boolean isNotEmpty(Object... fields){
         // Null equals empty
-        System.out.println("here");
         for (Object field : fields){
-            System.out.println("here2");
             if (!(field == null))
                 return true;
         }
-        System.out.println("here3");
         return false;
     }
 
     private ObservableList<Customer> customersObservable(){
         ObservableList<Customer> customers = FXCollections.observableArrayList();
-        System.out.println("Created obs ar list");
         try {
             while (resultSet.next()) {
-                System.out.println("Inside loop");
                 customers.add(new Customer(
                         resultSet.getString("CustomerID"),
                         resultSet.getString("First"),
@@ -324,24 +309,11 @@ public ObservableList<TransactionProduct> searchOrderItems(Transaction transacti
                         resultSet.getString("Email"),
                         resultSet.getString("Fax"))
                 );
-                System.out.println(resultSet.getString("CustomerID"));
-                System.out.println(resultSet.getString("First"));
-                System.out.println(resultSet.getString("Last"));
-                System.out.println(resultSet.getString("BusinessName"));
-                System.out.println(resultSet.getString("Address"));
-                System.out.println(resultSet.getString("City"));
-                System.out.println(resultSet.getString("State"));
-                System.out.println(resultSet.getString("Zip"));
-                System.out.println(resultSet.getString("Phone"));
-                System.out.println(resultSet.getString("Email"));
-                System.out.println(resultSet.getString("Fax"));
 
             }
-            System.out.println("done w/ loop");
         } catch (SQLException e) {
             showExceptionAlert(e);
         }
-        System.out.println("done 102");
         return customers;
 
     }
@@ -399,20 +371,36 @@ public ObservableList<TransactionProduct> searchOrderItems(Transaction transacti
             otherSQL = otherSQL.substring(4).trim();
             sql = sql + otherSQL;
         }
+        prepareStatement4(productID, name, description, price, sql);
+        return productObservable();
+    }
 
+    private <A, B, C, D> void prepareStatement4(A a, B b, C c, D d, String sql) {
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             int index = 1;
-            if (!(productID == null)) {setSQL(productID, statement, index); index++;}
-            if (!(name == null)) {setSQL(name, statement, index); index++;}
-            if (!(description == null)) { setSQL(description, statement, index); index++; }
-            if (!(price == null)) { setSQL(price, statement, index);}
+            if (!(a == null)) {
+                setSQL(a, statement, index);
+                index++;
+            }
+            if (!(b == null)) {
+                setSQL(b, statement, index);
+                index++;
+            }
+            if (!(c == null)) {
+                setSQL(c, statement, index);
+                index++;
+            }
+            if (!(d == null)) {
+                setSQL(d, statement, index);
+            }
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
             showExceptionAlert(e);
         }
-        return productObservable();
+
     }
+
 
     public ObservableList<TransactionProduct> getAllProducts(){
         String sql = "SELECT * FROM product";
@@ -447,7 +435,6 @@ public ObservableList<TransactionProduct> searchOrderItems(Transaction transacti
     public ObservableList<Transaction> searchTransactions(Integer transactionID, Status.Quote quote,
                                                           Status.Invoice invoice, Integer customerID,
                                                           Integer employeeID){
-        System.out.println("inside");
         String sql = "SELECT * FROM transaction";
         if (isNotEmpty(transactionID, quote, invoice, customerID, employeeID)){
             sql = sql + " WHERE ";
@@ -461,27 +448,10 @@ public ObservableList<TransactionProduct> searchOrderItems(Transaction transacti
             sql = sql + otherSQL;
 
         }
-        System.out.println("Done w/ ift if");
-
-        System.out.println("---------");
-        System.out.println(sql);
-        System.out.println("---------");
-
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            int index = 1;
-            if (!(transactionID == null)) {setSQL(transactionID, statement, index); index++;}
-            if (!(quote == null)) {setSQL(quote, statement, index); index++;}
-            if (!(invoice == null)) {setSQL(invoice, statement, index); index++;}
-            if (!(customerID == null)) { setSQL(customerID, statement, index); }
-            resultSet = statement.executeQuery();
-            System.out.println("succeeded getting results");
-        } catch (SQLException e) {
-            showExceptionAlert(e);
-        }
-//        System.out.println;
+        prepareStatement4(transactionID, quote, invoice, customerID, sql);
         return transactionObservable();
     }
+
 
     // Employee stuffs
     public ObservableList<Employee> searchEmployee(Integer employeeID, String first, String last,
@@ -553,19 +523,12 @@ showExceptionAlert(e);        }
         connection.setAutoCommit(false);
         //language=SQL
         String transactionSQL = "INSERT INTO transaction (Quote, Invoice, CustomerID, EmployeeID) VALUES (?,?,?,?)";
-        System.out.println(transactionSQL);
         PreparedStatement transactionStatement = connection.prepareStatement(transactionSQL, Statement.RETURN_GENERATED_KEYS);
-        System.out.println("Preparing statement");
-        System.out.println(quote.toString());
-        System.out.println(invoice.toString());
         transactionStatement.setString(1, quote.toString());
         transactionStatement.setString(2, invoice.toString());
         transactionStatement.setInt(3, customerID);
         transactionStatement.setInt(4, employeeID);
-        System.out.println("Excecuting update");
         transactionStatement.executeUpdate();
-        System.out.println("Update excecuted");
-        System.out.println();
         ResultSet keys = transactionStatement.getGeneratedKeys();
         keys.next();
         addTransactionProducts(transactionProducts, keys.getInt(1));
@@ -574,7 +537,6 @@ showExceptionAlert(e);        }
     }
 
     private void addTransactionProducts(ObservableList<TransactionProduct> transactionProducts, int transactionID) throws SQLException{
-        System.out.println("Lel");
         String orderItemSQL = "INSERT INTO orderitem (TransactionID, ProductID, Quantity) VALUES (?,?,?)";
         PreparedStatement productStatement;
         for (TransactionProduct product:transactionProducts){
@@ -583,7 +545,6 @@ showExceptionAlert(e);        }
             productStatement.setInt(2, product.getProductID());
             productStatement.setInt(3, product.getQuantity());
             productStatement.executeUpdate();
-            System.out.println("Done with "+product.getName());
         }
     }
 

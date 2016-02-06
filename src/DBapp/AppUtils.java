@@ -1,5 +1,7 @@
 package DBapp;
 
+import DBapp.DatabaseModels.Transaction;
+import DBapp.DatabaseModels.TransactionProduct;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
@@ -9,8 +11,6 @@ import javafx.scene.layout.Region;
 import javax.print.*;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 
@@ -67,66 +67,37 @@ public class AppUtils {
     }
 
 
-    private static void print() {
-        // TODO - FINISH
-        try {
-            DocFlavor flavor = DocFlavor.INPUT_STREAM.AUTOSENSE;
-            PrintService[] services = PrintServiceLookup.lookupPrintServices(
-                    flavor, null);
-            PrintService defaultService = PrintServiceLookup.lookupDefaultPrintService();
-            PrintService service = ServiceUI.printDialog(null, 200, 200, services, defaultService, flavor, new HashPrintRequestAttributeSet());
-            System.out.println(service);
-            System.out.println("Selected service ^^^");
-            FileInputStream textStream = new FileInputStream("");
-            Doc mydoc = new SimpleDoc(textStream, flavor, null);
-            DocPrintJob job = defaultService.createPrintJob();
-            try {
-                job.print(mydoc, null);
-            } catch (PrintException e) {
-                e.printStackTrace();
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     public static void print(TableView<Transaction> transactionTableView,
                              TableView<TransactionProduct> transactionProductTableView) {
-        System.out.println("here");
         try {
             DocFlavor flavor = DocFlavor.INPUT_STREAM.AUTOSENSE;
-            System.out.println("doc");
             PrintService[] services = PrintServiceLookup.lookupPrintServices(
                     flavor, null);
-            System.out.println("services");
             PrintService defaultService = PrintServiceLookup.lookupDefaultPrintService();
-            System.out.println("print service");
             PrintService service = ServiceUI.printDialog(null, 200, 200, services, defaultService,
                     flavor, new HashPrintRequestAttributeSet());
-            System.out.println(service.getName());
-            System.out.println("service 333");
             Transaction transaction = transactionTableView.getSelectionModel().getSelectedItem();
-            System.out.println("get trans it");
             StringBuilder receiptText = new StringBuilder();
-            System.out.println("s build");
             receiptText.append("----- RECEIPT START -----");
             receiptText.append("\n");
-            receiptText.append("TRANSACTION: " + transaction.getTransactionID());
+            receiptText.append("TRANSACTION: ");
+            receiptText.append(transaction.getTransactionID());
             receiptText.append("\n");
-            receiptText.append("Customer ID: " + transaction.getCustomerID());
+            receiptText.append("Customer ID: ");
+            receiptText.append(transaction.getCustomerID());
             receiptText.append("\n");
-            receiptText.append("Helped by employee: " + transaction.getEmployeeID());
+            receiptText.append("Helped by employee: ");
+            receiptText.append(transaction.getEmployeeID());
             receiptText.append("\n");
-            receiptText.append("QUOTE: " + transaction.getQuote());
+            receiptText.append("QUOTE: ");
+            receiptText.append(transaction.getQuote());
             receiptText.append("\n");
-            receiptText.append("INVOICE: " + transaction.getInvoice());
+            receiptText.append("INVOICE: ");
+            receiptText.append(transaction.getInvoice());
             receiptText.append("\n");
             receiptText.append("\n\n");
             receiptText.append("--- Order Items Start---");
             receiptText.append("\n");
-            System.out.println(receiptText.toString());
             for (TransactionProduct transactionProduct : transactionProductTableView.getItems()) {
                 receiptText.append(transactionProduct.prettyString());
                 receiptText.append("\n");
@@ -137,13 +108,10 @@ public class AppUtils {
             receiptText.append("\n\n");
             receiptText.append("--- RECEIPT END ---");
             // TODO Build string "Receipt".
-            System.out.println(receiptText.toString());
             InputStream receipt = new ByteArrayInputStream(receiptText.toString().getBytes());
             Doc doc = new SimpleDoc(receipt, flavor, null);
             DocPrintJob job = service.createPrintJob();
-            System.out.println("printing");
             job.print(doc, null);
-            System.out.println("Printed");
         } catch (Exception e) {
             AppUtils.displayAlert("Error", "Something went wrong", e.getMessage());
         }

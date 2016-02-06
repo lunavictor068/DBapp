@@ -8,9 +8,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-/**
- * Created by lunav on 1/18/2016.
- */
+
 public class AutoCompleteComboBoxListener<T> {
 
     private ComboBox<T> comboBox;
@@ -103,7 +101,6 @@ public class AutoCompleteComboBoxListener<T> {
         }
 
         String s = comboBox.getEditor().getText();
-        System.out.println("Found? " + found);
         if (!found && affect) {
             comboBox.getSelectionModel().clearSelection();
             comboBox.getEditor().setText(s);

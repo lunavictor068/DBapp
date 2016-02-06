@@ -1,26 +1,18 @@
 package DBapp.Controllers;
 
 import DBapp.AppUtils;
-import DBapp.Main;
 import DBapp.ModelData;
 import DBapp.Status;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-/**
- * Created by victorluna on 1/13/16.
- */
 public class markTransactionController implements Initializable{
     @FXML TextField transactionIDField;
     @FXML ChoiceBox<Status.Quote> quoteBox;
@@ -28,6 +20,8 @@ public class markTransactionController implements Initializable{
     @FXML Text message;
     public void markTransactionClick() {
         String transactionID = transactionIDField.getText();
+        try {
+            Integer transactionIDInteger = Integer.parseInt(transactionID);
         if (transactionID.equals("")) {
             AppUtils.displayAlert(
                     "Invalid ID",
@@ -39,7 +33,7 @@ public class markTransactionController implements Initializable{
         } else {
 
             ModelData.dbConnection.markTransaction(
-                    AppUtils.nullify(transactionID, Integer.class),
+                    transactionIDInteger,
                     quoteBox.getValue(),
                     invoiceBox.getValue()
             );
@@ -48,6 +42,11 @@ public class markTransactionController implements Initializable{
             invoiceBox.getSelectionModel().select(Status.Invoice.PENDING);
             message.setFill(Color.GREEN);
             message.setText("Success!");
+        }
+        } catch (NumberFormatException e) {
+            AppUtils.displayAlert("Error",
+                    transactionID + " is not a number.",
+                    "Please enter a number for the transaction ID.");
         }
     }
 

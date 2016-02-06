@@ -1,24 +1,28 @@
 package DBapp.Controllers;
 
-import DBapp.*;
+import DBapp.AppUtils;
+import DBapp.DatabaseModels.Product;
+import DBapp.DatabaseModels.TransactionProduct;
+import DBapp.ModelData;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-/**
- * Created by lunav on 1/12/2016.
- */
+
 public class searchProductController {
     @FXML TextField productIDField, nameField, descriptionField, priceField;
-    @FXML TableColumn productIDColumn, nameColumn, descriptionColumn, priceColumn;
+    @FXML
+    TableColumn<TransactionProduct, String> nameColumn, descriptionColumn;
+    @FXML
+    TableColumn<TransactionProduct, Integer> productIDColumn;
+    @FXML
+    TableColumn<TransactionProduct, Double> priceColumn;
     @FXML TableView<Product> table;
 
 
     public void searchProductClick(){
-        System.out.println("Search employee button test");
-        System.out.println("printtest");
         productIDColumn.setCellValueFactory(new PropertyValueFactory<>("productID"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));

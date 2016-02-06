@@ -8,45 +8,33 @@
             xmlns="http://javafx.com/javafx/8.0.65" fx:controller="DBapp.Controllers.Controller">
    <top>
       <MenuBar minWidth="800.0" style="-fx-background-color: #EEEEEE" BorderPane.alignment="TOP_CENTER">
-         <menus>
             <Menu mnemonicParsing="false" text="Add">
-               <items>
                   <MenuItem fx:id="AddCustomer" mnemonicParsing="false" onAction="#addCustomer" text="Customer" />
                   <MenuItem fx:id="AddEmployee" mnemonicParsing="false" onAction="#addEmployee" text="Employee" />
                   <MenuItem fx:id="AddProduct" mnemonicParsing="false" onAction="#addProduct" text="Product" /> 
-               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Search">
-               <items>
                   <MenuItem fx:id="SearchCustomer" mnemonicParsing="false" onAction="#searchCustomer" text="Customer" />
                   <MenuItem fx:id="SearchEmployee" mnemonicParsing="false" onAction="#searchEmployee" text="Employee" />
                   <MenuItem fx:id="SearchProduct" mnemonicParsing="false" onAction="#searchProduct" text="Product" />
                   <MenuItem fx:id="SearchTransaction" mnemonicParsing="false" onAction="#searchTransaction" text="Transaction" />
-               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Transactions">
-               <items>
                   <MenuItem fx:id="TransactionsNew" mnemonicParsing="false" onAction="#newTransaction" text="New" />
                   <MenuItem fx:id="TransactionsMark" mnemonicParsing="false" onAction="#mark" text="Mark" />
-               </items>
             </Menu>
-         </menus>
       </MenuBar>
    </top>
    <left>
       <HBox BorderPane.alignment="TOP_LEFT">
-         <children>
             <VBox id="main" spacing="5.0">
-               <children>
                   <Label text="Shortcuts" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font></Label>
                   <Button fx:id="NewTransaction" mnemonicParsing="false" onMouseClicked="#newTransaction" text="New Transaction" />
                   <Button fx:id="Mark" mnemonicParsing="false" onAction="#mark" text="Mark" />
-                  <Button fx:id="SandP" mnemonicParsing="false" onAction="#searchAndPrint" text="Search &amp; Print" />
                   <Button fx:id="AllTransactions" mnemonicParsing="false" onAction="#allTransactions" text="All Transactions" />
-               </children>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -55,17 +43,16 @@
                </padding>
             </VBox>
             <Separator maxWidth="1.0" minWidth="1.0" orientation="VERTICAL" prefHeight="331.0" prefWidth="1.0" />
-         </children>
       </HBox>
    </left>
    <bottom>
-      <ButtonBar buttonMinWidth="100.0" prefHeight="40.0" prefWidth="375.0" style="-fx-background-color: #757575"
-                 BorderPane.alignment="CENTER">
+       <ButtonBar buttonMinWidth="100.0" prefHeight="40.0" prefWidth="375.0" style="-fx-background-color: #757575"
+                  BorderPane.alignment="CENTER">
          <buttons>
-            <Label fx:id="nameLabel" prefHeight="16.0" prefWidth="742.0" text="Victor Luna" textFill="WHITE"/>
-            <Button fx:id="signOut" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="50.0"
-                    mnemonicParsing="false" onMouseClicked="#signout" prefHeight="25.0" prefWidth="25.0"
-                    text="Sign out"/>
+             <Label fx:id="nameLabel" prefHeight="16.0" prefWidth="742.0" text="Victor Luna" textFill="WHITE"/>
+             <Button fx:id="signOut" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="50.0"
+                     mnemonicParsing="false" onMouseClicked="#signout" prefHeight="25.0" prefWidth="25.0"
+                     text="Sign out"/>
          </buttons>
       </ButtonBar>
    </bottom>
@@ -73,34 +60,28 @@
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <top>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <TextFlow textAlignment="CENTER">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0"
-                              text="Use the manu bar above to navigate.&#10;There are shotrcuts on the left for your convenience."
-                              textAlignment="CENTER"/>
-                     </children>
+
+                <TextFlow textAlignment="CENTER">
+
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                          text="Use the menu bar above to navigate.&#10;                               There are shortcuts on the left for your convenience."
+                          textAlignment="CENTER"/>
                   </TextFlow>
-               </children>
             </HBox>
          </top>
          <center>
             <VBox>
-               <children>
                   <TextFlow textAlignment="CENTER">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Make sure to" textAlignment="CENTER"/>
-                        <Hyperlink onMouseClicked="#addCustomer" text="add a customer"/>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="before submitting a transaction."/>
-                     </children>
+
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Make sure to" textAlignment="CENTER"/>
+                      <Hyperlink onMouseClicked="#addCustomer" text="add a customer"/>
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="before submitting a transaction."/>
                   </TextFlow>
                   <TextFlow layoutX="10.0" layoutY="10.0" textAlignment="CENTER">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0"
-                              text="If the customer does not wish to register make sure they pay before they leave, don`t enter a customer ID, and mark the Quote as ACCEPTED and Invoice as PAID."/>
-                     </children>
+
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                            text="If the customer does not wish to register make sure they pay before they leave,                                don`t enter a customer ID, and mark the Quote as ACCEPTED and Invoice as PAID."/>
                   </TextFlow>
-               </children>
             </VBox>
          </center>
       </BorderPane>

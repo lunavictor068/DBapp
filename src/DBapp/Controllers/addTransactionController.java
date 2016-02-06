@@ -1,9 +1,9 @@
 package DBapp.Controllers;
 
 import DBapp.AppUtils;
+import DBapp.DatabaseModels.TransactionProduct;
 import DBapp.ModelData;
 import DBapp.Status;
-import DBapp.TransactionProduct;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,7 +23,12 @@ public class addTransactionController implements Initializable {
     @FXML ChoiceBox<Status.Invoice> invoiceBox;
     @FXML ChoiceBox<Status.Quote> quoteBox;
     @FXML TextField customerID, productIDSearchField;
-    @FXML TableColumn productIDTableColumn, nameTableColumn, descriptionTableColumn, priceTableColumn;
+    @FXML
+    TableColumn<TransactionProduct, String> nameTableColumn, descriptionTableColumn;
+    @FXML
+    TableColumn<TransactionProduct, Integer> productIDTableColumn;
+    @FXML
+    TableColumn<TransactionProduct, Double> priceTableColumn;
     @FXML TableColumn<TransactionProduct, Integer> quantityTableColumn;
     @FXML TableView<TransactionProduct> table;
     @FXML Text message;
@@ -41,12 +46,9 @@ public class addTransactionController implements Initializable {
         invoiceBox.getSelectionModel().select(Status.Invoice.PENDING);
         quoteBox.getItems().setAll(Status.Quote.values());
         quoteBox.getSelectionModel().select(Status.Quote.PENDING);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                nameSearchField.getItems().addAll(ModelData.dbConnection.getAllProducts());
-            }
-        }).start();
+        new Thread(() ->
+                nameSearchField.getItems().addAll(ModelData.dbConnection.getAllProducts())
+        ).start();
         quantityTableColumn.setCellFactory(
                 TextFieldTableCell.<TransactionProduct, Integer>forTableColumn(new IntegerStringConverter()));
         new AutoCompleteComboBoxListener<>(nameSearchField);

@@ -1,10 +1,9 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="DBapp:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/DBapp_jar</output-path>
+    <output-path>$PROJECT_DIR$/pre-built-jar</output-path>
     <root id="archive" name="DBapp.jar">
       <element id="module-output" name="DBapp" />
       <element id="extracted-dir" path="$PROJECT_DIR$/src/DBapp/mysql-connector-java-5.1.38-bin.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/Downloads/javafx-autocomplete-field-1.0.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

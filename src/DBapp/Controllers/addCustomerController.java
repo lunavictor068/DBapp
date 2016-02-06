@@ -4,9 +4,7 @@ import DBapp.AppUtils;
 import DBapp.ModelData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import DBapp.Main;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -15,7 +13,6 @@ import java.util.ResourceBundle;
 
 public class addCustomerController implements Initializable {
     @FXML TextField first, last, businessName, address, city, state, zip, phone, email, fax;
-    @FXML Button submit;
     @FXML Text message;
     @Override public void initialize(URL location, ResourceBundle resources) {
 

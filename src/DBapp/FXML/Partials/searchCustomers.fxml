@@ -8,27 +8,26 @@
             fx:controller="DBapp.Controllers.searchCustomerController">
    <bottom>
       <TextFlow BorderPane.alignment="CENTER">
-         <children>
-            <Text fx:id="message" strokeType="OUTSIDE" strokeWidth="0.0" />
-         </children>
+
+          <Text strokeType="OUTSIDE" strokeWidth="0.0"/>
+
       </TextFlow>
    </bottom>
    <top>
       <VBox id="main" BorderPane.alignment="CENTER">
-         <children>
             <HBox id="label">
-               <children>
-                  <TextFlow>
-                     <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Customers">
+
+                <TextFlow>
+
+                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Customers">
                            <font>
                               <Font name="Arial Bold" size="24.0" />
                            </font>
                         </Text>
-                     </children>
-                  </TextFlow>
-               </children>
-               <padding>
+
+                </TextFlow>
+
+                <padding>
                   <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                </padding>
                <opaqueInsets>
@@ -46,9 +45,7 @@
                <rowConstraints>
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
                </rowConstraints>
-               <children>
                   <FlowPane hgap="10.0">
-                     <children>
                         <GridPane>
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
@@ -57,10 +54,10 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer ID"/>
+
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer ID"/>
                               <TextField fx:id="customerIDField" GridPane.rowIndex="1"/>
-                           </children>
+
                         </GridPane>
                         <GridPane layoutX="10.0" layoutY="10.0">
                            <columnConstraints>
@@ -70,10 +67,8 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
-                           <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First"/>
                               <TextField fx:id="firstField" GridPane.rowIndex="1"/>
-                           </children>
                         </GridPane>
                         <GridPane layoutX="110.0" layoutY="10.0">
                            <columnConstraints>
@@ -83,10 +78,10 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last"/>
+
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last"/>
                               <TextField fx:id="lastField" GridPane.rowIndex="1"/>
-                           </children>
+
                         </GridPane>
                         <GridPane layoutX="210.0" layoutY="10.0">
                            <columnConstraints>
@@ -96,10 +91,10 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bussiness Name"/>
+
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bussiness Name"/>
                               <TextField fx:id="businessNameField" GridPane.rowIndex="1"/>
-                           </children>
+
                         </GridPane>
                         <GridPane layoutX="310.0" layoutY="10.0">
                            <columnConstraints>
@@ -109,10 +104,10 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address"/>
+
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address"/>
                               <TextField fx:id="addressField" GridPane.rowIndex="1"/>
-                           </children>
+
                         </GridPane>
                         <GridPane layoutX="410.0" layoutY="10.0">
                            <columnConstraints>
@@ -122,10 +117,10 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City"/>
+
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City"/>
                               <TextField fx:id="cityField" GridPane.rowIndex="1"/>
-                           </children>
+
                         </GridPane>
                         <GridPane layoutX="510.0" layoutY="10.0">
                            <columnConstraints>
@@ -135,10 +130,10 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="State"/>
+
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="State"/>
                               <TextField fx:id="stateField" GridPane.rowIndex="1"/>
-                           </children>
+
                         </GridPane>
                         <GridPane layoutX="610.0" layoutY="10.0">
                            <columnConstraints>
@@ -148,10 +143,10 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zip"/>
+
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zip"/>
                               <TextField fx:id="zipField" GridPane.rowIndex="1"/>
-                           </children>
+
                         </GridPane>
                         <GridPane layoutX="10.0" layoutY="70.0">
                            <columnConstraints>
@@ -161,10 +156,10 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phone"/>
+
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phone"/>
                               <TextField fx:id="phoneField" GridPane.rowIndex="1"/>
-                           </children>
+
                         </GridPane>
                         <GridPane layoutX="110.0" layoutY="70.0">
                            <columnConstraints>
@@ -174,10 +169,10 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email"/>
+
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email"/>
                               <TextField fx:id="emailField" GridPane.rowIndex="1"/>
-                           </children>
+
                         </GridPane>
                         <GridPane layoutX="210.0" layoutY="70.0">
                            <columnConstraints>
@@ -187,24 +182,21 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                            </rowConstraints>
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fax"/>
+
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fax"/>
                               <TextField fx:id="faxField" GridPane.rowIndex="1"/>
-                           </children>
+
                         </GridPane>
-                     </children>
                      <GridPane.margin>
                         <Insets left="10.0" right="10.0"/>
                      </GridPane.margin>
                   </FlowPane>
                   <Button mnemonicParsing="false" onMouseClicked="#searchCustomer" text="Submit"
                           GridPane.columnIndex="1"/>
-               </children>
                <VBox.margin>
                   <Insets bottom="10.0"/>
                </VBox.margin>
             </GridPane>
-         </children>
       </VBox>
    </top>
    <center>

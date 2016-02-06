@@ -8,20 +8,20 @@
             fx:controller="DBapp.Controllers.searchProductController">
    <top>
       <VBox id="main" BorderPane.alignment="CENTER">
-         <children>
-             <HBox id="label">
-                 <children>
-                     <TextFlow>
-                         <children>
-                             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Products">
+
+          <HBox id="label">
+
+              <TextFlow>
+
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Products">
                                  <font>
                                      <Font name="Arial Bold" size="24.0" />
                                  </font>
                              </Text>
-                         </children>
-                     </TextFlow>
-                 </children>
-                 <padding>
+
+              </TextFlow>
+
+              <padding>
                      <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                  </padding>
                  <opaqueInsets>
@@ -51,8 +51,8 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints vgrow="SOMETIMES" />
               </rowConstraints>
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name" GridPane.columnIndex="1" />
+
+                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name" GridPane.columnIndex="1" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Product ID" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Price" GridPane.columnIndex="3" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description" GridPane.columnIndex="2" />
@@ -61,12 +61,12 @@
                   <TextField fx:id="descriptionField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <TextField fx:id="priceField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                   <Button mnemonicParsing="false" onMouseClicked="#searchProductClick" text="Submit" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-               </children>
+
                  <padding>
                      <Insets bottom="10.0" left="10.0" right="10.0"/>
                  </padding>
             </GridPane>
-         </children>
+
       </VBox>
    </top>
    <center>
@@ -81,9 +81,9 @@
    </center>
    <bottom>
        <TextFlow BorderPane.alignment="CENTER">
-           <children>
-               <Text fx:id="message" strokeType="OUTSIDE" strokeWidth="0.0" />
-           </children>
+
+           <Text strokeType="OUTSIDE" strokeWidth="0.0"/>
+
        </TextFlow>
    </bottom>
 </BorderPane>

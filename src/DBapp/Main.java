@@ -18,7 +18,7 @@ public class Main extends Application {
         ModelData.stage.setMinWidth(1000);
         ModelData.dbConnection = new DBConnection();
         Scene root = new Scene(FXMLLoader.load(getClass().getResource("FXML/start.fxml")));
-        root.getStylesheets().add(getClass().getResource("test.css").toExternalForm());
+        root.getStylesheets().add(getClass().getResource("StyleSheets/MainStyleSheet.css").toExternalForm());
         primaryStage.setTitle("Database Application");
         primaryStage.setScene(root);
         primaryStage.show();

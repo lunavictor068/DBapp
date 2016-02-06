@@ -3,15 +3,11 @@ package DBapp.Controllers;
 import DBapp.AppUtils;
 import DBapp.ModelData;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class addEmployeeController implements Initializable{
+public class addEmployeeController {
     @FXML TextField first, last, address, city, state, zip, phone, email;
     @FXML Button submit;
     @FXML Text message;
@@ -41,9 +37,4 @@ public class addEmployeeController implements Initializable{
         email.clear();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        first.setStyle("-fx-border-color: red;");
-        first.setStyle("");
-    }
 }

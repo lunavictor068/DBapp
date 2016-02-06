@@ -1,10 +1,12 @@
 package DBapp.Controllers;
 
 import DBapp.AppUtils;
-import DBapp.Customer;
+import DBapp.DatabaseModels.Customer;
 import DBapp.ModelData;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class searchCustomerController {
@@ -28,7 +30,6 @@ public class searchCustomerController {
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         faxColumn.setCellValueFactory(new PropertyValueFactory<>("fax"));
-        System.out.println("lel");
         table.setItems(
                 ModelData.dbConnection.searchCustomer(
                         AppUtils.nullify(customerIDField.getText(), Integer.class),

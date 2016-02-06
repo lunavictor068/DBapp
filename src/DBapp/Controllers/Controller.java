@@ -11,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -24,18 +23,14 @@ public class Controller implements Initializable{
 
     @FXML MenuItem AddCustomer, AddEmployee, AddProduct, SearchCustomer,  SearchEmployee, SearchProduct,
             SearchTransaction, TransactionsNew, TransactionsMark;
-
-    @FXML Button NewTransaction, Mark, SandP, AllTransactions, signOut;
-
-    @FXML ScrollPane scrollPane;
-
+    @FXML
+    Button NewTransaction, Mark, AllTransactions, signOut;
     @FXML
     Label nameLabel;
-
     @FXML BorderPane borderPane;
 
     @Override public void initialize(URL location, ResourceBundle resources) {
-        nameLabel.setText(ModelData.currentEmloyee.getFirst() + " " + ModelData.currentEmloyee.getLast());
+        nameLabel.setText(ModelData.currentEmployee.getFirst() + " " + ModelData.currentEmployee.getLast());
     }
 
     private void loadCenterPartial(String fxmlName){
@@ -77,11 +72,6 @@ public class Controller implements Initializable{
         loadCenterPartial("searchTransaction");
     }
 
-    public void searchAndPrint(){
-        //TODO implement method
-        System.out.println("TODO implement method");
-    }
-
     public void allTransactions(){
         try {
             Node node = FXMLLoader.load(Main.class.getResource("FXML/Partials/searchTransaction.fxml"));
@@ -99,14 +89,14 @@ public class Controller implements Initializable{
     public void signout() {
         try {
             Scene root = new Scene(FXMLLoader.load(Main.class.getResource("FXML/start.fxml")));
-            root.getStylesheets().add(Main.class.getResource("test.css").toExternalForm());
+            root.getStylesheets().add(Main.class.getResource("MainStyleSheet.css").toExternalForm());
             ModelData.stage.setScene(root);
             ModelData.stage.hide();
             ModelData.stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ModelData.currentEmloyee = null;
+        ModelData.currentEmployee = null;
     }
 
 
