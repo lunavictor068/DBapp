@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" id="main" xmlns="http://javafx.com/javafx/8.0.65"
+            fx:controller="DBapp.Controllers.addTransactionController">
+   <bottom>
+      <VBox BorderPane.alignment="CENTER">
+            <TextFlow>
+                  <Text fx:id="message" strokeType="OUTSIDE" strokeWidth="0.0" />
+            </TextFlow>
+            <HBox alignment="CENTER" spacing="10.0">
+                  <TextFlow>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Product ID:" />
+                  </TextFlow>
+                  <TextField fx:id="productIDSearchField" promptText="Product ID" />
+                  <TextFlow>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Name:" />
+                  </TextFlow>
+                  <ComboBox fx:id="nameSearchField" prefWidth="150.0" promptText="Product Name" />
+                  <TextFlow textAlignment="RIGHT">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Quantity:" />
+                  </TextFlow>
+                  <ChoiceBox fx:id="productQuantityBox" prefHeight="25.0" prefWidth="61.0" />
+                <Button mnemonicParsing="false" onMouseClicked="#addItemRowClicked" text="Add Item Row"/>
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <ButtonBar buttonMinWidth="125.0">
+               <buttons>
+                   <Button mnemonicParsing="false" onMouseClicked="#deleteSelectedRowClicked"
+                           text="Delete Selected Row"/>
+                   <Button mnemonicParsing="false" onMouseClicked="#submitTransactionClicked"
+                           text="Submit Transaction"/>
+               </buttons>
+            </ButtonBar>
+      </VBox>
+   </bottom>
+   <center>
+      <TableView fx:id="table" minHeight="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="productIDTableColumn" prefWidth="75.0" text="Product ID" />
+          <TableColumn fx:id="nameTableColumn" prefWidth="167.0" text="Name" />
+            <TableColumn fx:id="descriptionTableColumn" prefWidth="223.0" text="Description" />
+            <TableColumn fx:id="priceTableColumn" prefWidth="122.0" text="Price" />
+            <TableColumn fx:id="quantityTableColumn" onEditCommit="#commit" prefWidth="115.0" text="Quantity" />
+        </columns>
+      </TableView>
+   </center>
+   <top>
+      <VBox BorderPane.alignment="CENTER">
+            <HBox id="label" BorderPane.alignment="CENTER">
+                  <TextFlow>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Product">
+                           <font>
+                              <Font name="Arial Bold" size="24.0" />
+                           </font>
+                        </Text>
+                  </TextFlow>
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" />
+               </BorderPane.margin>
+            </HBox>
+            <Pane prefHeight="59.0" prefWidth="595.0">
+                  <VBox layoutX="65.0" layoutY="15.0">
+                        <HBox alignment="CENTER_LEFT">
+                              <Label text="Customer ID: " />
+                              <TextField fx:id="customerID" promptText="Customer ID" />
+                        </HBox>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="NOTE: If customer is new please add customer before making a new transaction." />
+                  </VBox>
+            </Pane>
+            <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                  <Text layoutX="515.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quote Status: " />
+                  <ChoiceBox fx:id="quoteBox" prefWidth="150.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Invoice Status: " />
+                  <ChoiceBox fx:id="invoiceBox" layoutX="486.0" layoutY="10.0" prefWidth="150.0" />
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+            </HBox>
+      </VBox>
+   </top>
+</BorderPane>
