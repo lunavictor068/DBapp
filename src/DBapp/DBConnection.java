@@ -100,7 +100,6 @@ public class DBConnection {
         dialog.getDialogPane().setContent(gridPane);
 
         return dialog;
-
     }
 
     public void addEmployee(String firstName, String lastName,
