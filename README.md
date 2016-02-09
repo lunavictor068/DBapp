@@ -15,7 +15,7 @@ This is a point of sale program built for a friend. The program enables the user
   - Record a transactiom and all its information
   - Print (to a physical printer) receipts.
   
-### Dataase Diagram
+### Database Diagram
 ![Database diagram](Database/diagram.png)
 
 A transaction has a Quote and Invoice column. Those columns represent the state of the transaction.
@@ -46,9 +46,18 @@ Password: 8b647dc7
 You can use Employee ID *10* to login.
     
 
-Pre-compiled Jar: [Test][DemoJar]
+Download the [pre-compiled Jar][DemoJar] or compile [DBapp][DBapp] on your own.  
+**How to launch the [pre-compiled Jar][DemoJar].
+Make sure you have Java 1.8_73 installed and you PATH is set.  
+Enter the following code in your shell/terminal/command prompt.  
+```sh
+$ java -jar <path/to/downloadedjar/DBapp.jar>
+```  
+Connect to the databse.  
+Enjoy! :smile:
    [DemoJar]: <Demo_Jar/DBapp.jar?raw=true>
    [MAMP]: <https://www.mamp.info/en/downloads/>
    [Ubuntu]: <https://help.ubuntu.com/community/ApacheMySQLPHP>
    [DBStructure]: <Database/DatabaseStructure.sql>
    [SampleDB]: <Database/sampleDB.sql>
+   [DBapp]: <DBapp/>
