@@ -33,7 +33,7 @@ The file [Database/sample.sql][SampleDB] has commands to structure a database wi
 You can use [MAMP][MAMP] on Windows and Mac OS X to install MySQL and phpMyAdmin and visually manage your database.
 If you're on Linux you can follow [this][Ubuntu] guide to install MySQL and phpMyAdmin.
 
-By default the program attempts to connect to a database called "*alex5db*" on *localhost* using a user with the username "dbuser" and password "*password*".
+By default the program attempts to connect to a database called "*alex5db*" on *localhost* using a user with the username "*dbuser*" and password "*password*". If id does not find the database it will prompt you to provide the database's information.
 
 If you dont want to go through the trouble of creating your own databse you could connect to the following database:  
 **NOTE:** Your connection to the database will time-out after some time. You will have to restart the program to connect again. You may also be denied access since I can only have 4 active connections to that database.  
@@ -48,7 +48,7 @@ You can use Employee ID *10* to login.
 
 Download the [pre-compiled Jar][DemoJar] or compile [DBapp][DBapp] on your own.  
 **How to launch the [pre-compiled Jar][DemoJar].
-Make sure you have Java 1.8_73 installed and you PATH is set.  
+Make sure you have Java 1.8_73 or later installed and your PATH is set.  
 Enter the following code in your shell/terminal/command prompt.  
 ```sh
 $ java -jar <path/to/downloadedjar/DBapp.jar>
