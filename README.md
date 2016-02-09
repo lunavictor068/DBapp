@@ -1,7 +1,7 @@
 # DBapp
 
 This is a point of sale program built for a friend. The program enables 
-the user to graphically access and edit the blueness transaction records.
+the user to graphically access and edit the business transaction records.
 ### Features
   - Add Data
     - Products
