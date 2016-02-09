@@ -51,8 +51,9 @@ Download the [pre-compiled Jar][DemoJar] or compile [DBapp][DBapp] on your own.
 Make sure you have Java 1.8_73 or later installed and your PATH is set.  
 Enter the following code in your shell/terminal/command prompt.  
 ```sh
-$ java -jar <path/to/downloadedjar/DBapp.jar>
+java -jar <path/to/downloadedjar/DBapp.jar>
 ```  
+**<path/to/downloadedjar/DBapp.jar>** is the path to the pre-compiled Jar. Most command line programs let you drag and drop the file to automatically get the path to that file.  
 Connect to the databse.  
 Enjoy! :smile:
    [DemoJar]: <Demo_Jar/DBapp.jar?raw=true>
