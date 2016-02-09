@@ -47,7 +47,7 @@ You can use Employee ID *10* to login.
     
 
 Download the [pre-compiled Jar][DemoJar] or compile [DBapp][DBapp] on your own.  
-**How to launch the [pre-compiled Jar][DemoJar].
+### How to launch the [pre-compiled Jar][DemoJar].
 Make sure you have Java 1.8_73 or later installed and your PATH is set.  
 Enter the following code in your shell/terminal/command prompt.  
 ```sh
