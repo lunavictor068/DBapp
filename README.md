@@ -51,4 +51,4 @@ Pre-compiled Jar: [Test][DemoJar]
    [MAMP}: <https://www.mamp.info/en/downloads/>
    [Ubuntu]: <https://help.ubuntu.com/community/ApacheMySQLPHP>
    [DBStructure]: <Database/DatabaseStructure.sql?raw=true>
-   [SampleDB]: <Database/sample.sql?raw=true>
+   [SampleDB]: <Database/sampleDB.sql>
