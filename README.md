@@ -14,3 +14,6 @@ This is a point of sale program built for a friend. The program enables the user
   - Update Transaction Records
   - Record a transactiom and all its information
   - Print (to a physical printer) receipts.
+  
+### Dataase Diagram
+![Database diagram](Database/diagram.png)
