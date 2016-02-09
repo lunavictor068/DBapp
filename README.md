@@ -31,7 +31,7 @@ The file [Database/DatabaseStructure.sql][DBStructure] has commands to structure
 The file [Database/sample.sql][SampleDB] has commands to structure a database with the required structure AND fill it with sample data. 
 
 You can use [MAMP][MAMP] on Windows and Mac OS X to install MySQL and phpMyAdmin and visually manage your database.
-If you're on Linux you can follow [this] guide to install MySQL and phpMyAdmin.
+If you're on Linux you can follow [this][Ubuntu] guide to install MySQL and phpMyAdmin.
 
 By default the program attempts to connect to a database called "*alex5db*" on *localhost* using a user with the username "dbuser" and password "*password*".
 
