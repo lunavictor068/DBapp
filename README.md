@@ -48,7 +48,7 @@ You can use Employee ID *10* to login.
 
 Pre-compiled Jar: [Test][DemoJar]
    [DemoJar]: <Demo_Jar/DBapp.jar?raw=true>
-   [MAMP}: <https://www.mamp.info/en/downloads/>
+   [MAMP]: <https://www.mamp.info/en/downloads/>
    [Ubuntu]: <https://help.ubuntu.com/community/ApacheMySQLPHP>
-   [DBStructure]: <Database/DatabaseStructure.sql?raw=true>
+   [DBStructure]: <Database/DatabaseStructure.sql>
    [SampleDB]: <Database/sampleDB.sql>
